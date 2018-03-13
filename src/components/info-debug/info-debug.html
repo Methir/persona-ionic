@@ -1,4 +1,10 @@
-<!-- Generated template for the InfoDebugComponent component -->
-<div>
-  {{text}}
-</div>
+<ion-card>
+    <ion-card-header text-center>
+      <ion-card-title>Info Debug</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-row>
+          {{ obj | json }}
+      </ion-row>
+    </ion-card-content>
+  </ion-card>

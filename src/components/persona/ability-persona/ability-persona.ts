@@ -1,22 +1,49 @@
-import { Component } from '@angular/core';
+import { Component, Input, forwardRef } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-/**
- * Generated class for the AbilityPersonaComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
+export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => AbilityPersonaComponent),
+  multi: true
+};
+
 @Component({
   selector: 'ability-persona',
-  templateUrl: 'ability-persona.html'
+  templateUrl: 'ability-persona.html',
+  providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
 })
-export class AbilityPersonaComponent {
+export class AbilityPersonaComponent implements ControlValueAccessor {
 
-  text: string;
+  @Input() label: string;
+  valueOptions: number[] = [];
+  private onChange;
+  private value: number;
 
   constructor() {
     console.log('Hello AbilityPersonaComponent Component');
-    this.text = 'Hello World';
+    for(let i: number = 0; i<=50; i++) {
+      this.valueOptions.push(i);
+    }
   }
 
+  get abilityValue(): number {
+    return this.value;
+  }
+
+  set abilityValue(value) {
+    this.value = value;
+    this.onChange(value);
+  }
+
+  writeValue(value: number): void {
+    this.value = value;
+  }
+
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any): void { }
+
+  setDisabledState?(isDisabled: boolean): void { }
 }

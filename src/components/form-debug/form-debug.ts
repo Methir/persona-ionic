@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 /**
  * Generated class for the FormDebugComponent component.
@@ -12,11 +13,10 @@ import { Component } from '@angular/core';
 })
 export class FormDebugComponent {
 
-  text: string;
+  @Input() form: FormControl;
 
   constructor() {
     console.log('Hello FormDebugComponent Component');
-    this.text = 'Hello World';
   }
 
 }

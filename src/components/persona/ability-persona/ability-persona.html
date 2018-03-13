@@ -1,4 +1,16 @@
-<!-- Generated template for the AbilityPersonaComponent component -->
-<div>
-  {{text}}
-</div>
+<ion-card text-center>
+  <ion-card-header>
+    <ion-card-title>{{ label }}</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-item>
+      <ion-label>Valor</ion-label>
+      <ion-select [(ngModel)]="abilityValue" interface="popover">
+        <ion-option *ngFor="let valueOption of valueOptions" 
+                    [value]="valueOption">
+          {{valueOption}}
+        </ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-card-content>
+</ion-card>

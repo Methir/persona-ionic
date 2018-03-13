@@ -1,4 +1,13 @@
-<!-- Generated template for the FormDebugComponent component -->
-<div>
-  {{text}}
-</div>
+<ion-card>
+  <ion-card-header text-center>
+    <ion-card-title>Formulário Debug</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-row>
+        <ion-title>Validação: {{ form.valid | json }}</ion-title>
+    </ion-row>
+    <ion-row>
+        {{ form.value | json }}
+    </ion-row>
+  </ion-card-content>
+</ion-card>

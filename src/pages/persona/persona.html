@@ -6,7 +6,20 @@
 
 </ion-header>
 
-
-<ion-content padding>
- Teste Persona
+<ion-content>
+  <ion-grid>
+    <form [formGroup]="forms">
+      <ion-row>
+        <ion-col  col-12 col-ms-6 col-md-4 col-xl-2
+                  *ngFor="let abilityKey of abilityKeys">
+          <ability-persona  [label]="abilityKey.label" 
+                            formControlName="{{abilityKey.name}}">
+          </ability-persona>
+        </ion-col>
+      </ion-row>
+      
+    </form>
+    <form-debug [form]="forms"></form-debug>
+    <info-debug [obj]="persona"></info-debug>
+  </ion-grid>
 </ion-content>

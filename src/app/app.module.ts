@@ -4,7 +4,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
-import { ComponentsModule } from '../components/components.module';
 import { PersonaPageModule } from './../pages/persona/persona.module';
 import { HomePageModule } from '../pages/home/home.module';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -22,7 +21,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   imports: [
     BrowserModule,
     HttpClientModule,
-    ComponentsModule,
     HomePageModule,
     PersonaPageModule,
     IonicModule.forRoot(MyApp)
