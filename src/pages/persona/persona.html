@@ -9,8 +9,15 @@
 <ion-content>
   <ion-grid>
     <form [formGroup]="forms">
+
       <ion-row>
-        <ion-col  col-12 col-ms-6 col-md-4 col-xl-2
+        <ion-col col-12 col-ms-4 col-md-4 col-xl-4>
+          <name-persona formControlName="name"></name-persona>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-6 col-ms-6 col-md-4 col-xl-2
                   *ngFor="let abilityKey of abilityKeys">
           <ability-persona  [label]="abilityKey.label" 
                             formControlName="{{abilityKey.name}}">
