@@ -1,22 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
-/**
- * Generated class for the PpPersonaComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
 @Component({
   selector: 'pp-persona',
-  templateUrl: 'pp-persona.html'
+  templateUrl: 'pp-persona.html',
 })
 export class PpPersonaComponent {
 
-  text: string;
+  @Input() ppTotal;
 
   constructor() {
     console.log('Hello PpPersonaComponent Component');
-    this.text = 'Hello World';
   }
 
 }

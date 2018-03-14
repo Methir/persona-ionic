@@ -1,3 +1,4 @@
+import { KeysProvider } from './../keys/keys';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Persona } from '../../interfaces/persona';
@@ -22,12 +23,21 @@ export class PersonaProvider {
     car : 10,
   };
 
-  constructor() {
+  constructor( private keysProvider: KeysProvider ) {
     console.log('PersonaProvider');
   }
 
   getPersona() {
     return this.persona;
+  }
+
+  getTotalPoints(persona): number {
+    console.log(persona);
+    let total: number = 0;
+    for(let key of this.keysProvider.abilityKeys) {
+      total += persona[key.name];
+    }
+    return total-60;
   }
 
 }

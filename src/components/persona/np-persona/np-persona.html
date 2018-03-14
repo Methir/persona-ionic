@@ -1,4 +1,13 @@
-<!-- Generated template for the NpPersonaComponent component -->
-<div>
-  {{text}}
-</div>
+<ion-card>
+  <ion-card-content>
+    <ion-item>
+      <ion-label>Nível de Campanha</ion-label>
+      <ion-select [(ngModel)]="npValue" interface="popover">
+        <ion-option *ngFor="let valueOption of valueOptions" 
+                    [value]="valueOption">
+          {{valueOption}}
+        </ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-card-content>
+</ion-card>

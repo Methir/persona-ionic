@@ -15,6 +15,7 @@ export class PersonaPage {
 
   forms: FormGroup;
   persona: Persona;
+  ppTotal: number;
   abilityKeys: any[];
 
   constructor(public navCtrl: NavController, 
@@ -30,9 +31,10 @@ export class PersonaPage {
   ngOnInit() {
     this.abilityKeys = this.keysProvider.abilityKeys;
     this.persona = this.personaProvider.getPersona();
+    this.ppTotal = this.personaProvider.getTotalPoints(this.persona);
     this.forms = this.formBuilder.group({
       name : [this.persona.name],
-      np : [this.persona.np], 
+      np : [this.persona.np],
       for : [this.persona.for],
       des : [this.persona.des],
       con : [this.persona.con],
@@ -40,6 +42,12 @@ export class PersonaPage {
       sab : [this.persona.sab],
       car : [this.persona.car],
     });
+    this.forms.valueChanges.subscribe(
+      (persona) => {
+        this.ppTotal = this.personaProvider.getTotalPoints(persona);
+        
+      } 
+    );
   }
 
 }
