@@ -1,3 +1,4 @@
+import { TotalPoints } from './../../interfaces/total-points';
 import { KeysProvider } from './../../providers/keys/keys';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -15,7 +16,7 @@ export class PersonaPage {
 
   forms: FormGroup;
   persona: Persona;
-  ppTotal: number;
+  totalPoints: TotalPoints;
   abilityKeys: any[];
 
   constructor(public navCtrl: NavController, 
@@ -31,7 +32,7 @@ export class PersonaPage {
   ngOnInit() {
     this.abilityKeys = this.keysProvider.abilityKeys;
     this.persona = this.personaProvider.getPersona();
-    this.ppTotal = this.personaProvider.getTotalPoints(this.persona);
+    this.totalPoints = this.personaProvider.getTotalPoints(this.persona);
     this.forms = this.formBuilder.group({
       name : [this.persona.name],
       np : [this.persona.np],
@@ -44,8 +45,7 @@ export class PersonaPage {
     });
     this.forms.valueChanges.subscribe(
       (persona) => {
-        this.ppTotal = this.personaProvider.getTotalPoints(persona);
-        
+        this.totalPoints = this.personaProvider.getTotalPoints(persona);
       } 
     );
   }

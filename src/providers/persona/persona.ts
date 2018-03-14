@@ -1,3 +1,4 @@
+import { TotalPoints } from './../../interfaces/total-points';
 import { KeysProvider } from './../keys/keys';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -31,13 +32,14 @@ export class PersonaProvider {
     return this.persona;
   }
 
-  getTotalPoints(persona): number {
-    console.log(persona);
-    let total: number = 0;
+  getTotalPoints(persona: Persona): TotalPoints {
+    let total: TotalPoints = {ability:0, all:0};
     for(let key of this.keysProvider.abilityKeys) {
-      total += persona[key.name];
+      total.ability += persona[key.name];
     }
-    return total-60;
+    total.ability -= 60;
+    total.all = total.ability;
+    return total;
   }
 
 }
