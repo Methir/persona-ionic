@@ -20,6 +20,7 @@ export class PersonaPage {
   bonusPoints: any;
   abilityKeys: any[];
   combatKeys: any[];
+  savingKeys: any[];
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
@@ -28,6 +29,7 @@ export class PersonaPage {
               private personaProvider: PersonaProvider ) {
     this.abilityKeys = this.keysProvider.abilityKeys;
     this.combatKeys = this.keysProvider.combatKeys;
+    this.savingKeys = this.keysProvider.savingKeys;
   }
 
   ionViewDidLoad() {
@@ -41,21 +43,21 @@ export class PersonaPage {
     this.forms = this.formBuilder.group({
       name : [this.persona.name],
       np : [this.persona.np],
-      for : [this.persona.for],
-      des : [this.persona.des],
-      con : [this.persona.con],
-      int : [this.persona.int],
-      sab : [this.persona.sab],
-      car : [this.persona.car],
-      damage : [this.persona.damage],
-      attack : [this.persona.attack],
-      defense : [this.persona.defense],
-      life : [this.persona.life],
-      haste : [this.persona.haste],
-      resist : [this.persona.resist],
-      reflex : [this.persona.reflex],
-      fort : [this.persona.fort],
-      will : [this.persona.will],
+      forca : [this.persona.forca],
+      destreza : [this.persona.destreza],
+      constituicao : [this.persona.constituicao],
+      inteligencia : [this.persona.inteligencia],
+      sabedoria : [this.persona.sabedoria],
+      carisma : [this.persona.carisma],
+      dano : [this.persona.dano],
+      ataque : [this.persona.ataque],
+      defesa : [this.persona.defesa],
+      vida : [this.persona.vida],
+      iniciativa : [this.persona.iniciativa],
+      resistencia : [this.persona.resistencia],
+      reflexo : [this.persona.reflexo],
+      fortitude : [this.persona.fortitude],
+      vontade : [this.persona.vontade],
     });
     this.forms.valueChanges.subscribe(
       (persona) => {
@@ -63,6 +65,10 @@ export class PersonaPage {
         this.bonusPoints = this.personaProvider.getBonusPoints(persona);
       } 
     );
+  }
+
+  isHidden(element){
+    console.log(element);
   }
 
 }

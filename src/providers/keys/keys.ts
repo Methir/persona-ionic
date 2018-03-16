@@ -5,31 +5,31 @@ export class KeysProvider {
 
   get abilityKeys(): any[] {
     return [
-      { label : "Força", name : "for" },
-      { label : "Destreza", name : "des" }, 
-      { label : "Constituição", name : "con" }, 
-      { label : "Inteligencia", name : "int" }, 
-      { label : "Sabedoria", name : "sab" }, 
-      { label : "Carisma", name : "car" }
+      { label : "Força", name : "forca" },
+      { label : "Destreza", name : "destreza" }, 
+      { label : "Constituição", name : "constituicao" }, 
+      { label : "Inteligência", name : "inteligencia" }, 
+      { label : "Sabedoria", name : "sabedoria" }, 
+      { label : "Carisma", name : "carisma" }
     ];
   }
 
   get combatKeys(): any[] {
     return [
-      { label : "Damage", name : "damage" },
-      { label : "Attack", name : "attack" },
-      { label : "Defense", name : "defense" },
-      { label : "Life", name : "life" },
-      { label : "Initiative", name : "haste" },
+      { label : "Dano", name : "dano" },
+      { label : "Ataque", name : "ataque" },
+      { label : "Defesa", name : "defesa" },
+      { label : "Vida", name : "vida" },
+      { label : "Iniciativa", name : "iniciativa" },
     ];
   }
 
-  get savingPoints(): any[] {
+  get savingKeys(): any[] {
     return [
-      { label : "Resistance", name : "resist"},
-      { label : "Reflex", name : "reflex"},
-      { label : "Fortitude", name : "fort"},
-      { label : "Will", name : "will"},
+      { label : "Resistência", name : "resistencia"},
+      { label : "Reflexo", name : "reflexo"},
+      { label : "Fortitude", name : "fortitude"},
+      { label : "Vontade", name : "vontade"},
     ];
   }
 

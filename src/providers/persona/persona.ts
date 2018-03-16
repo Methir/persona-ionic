@@ -9,22 +9,22 @@ export class PersonaProvider {
   private persona: Persona = {
     name : 'noob',
     np : 0,
-    for : 10, 
-    des : 10,
-    con : 10,
-    int : 10,
-    sab : 10,
-    car : 10,
-    damage : 0,
-    attack : 0,
-    defense : 0,
-    life : 0,
-    haste : 0,
-    resist : 0,
-    reflex : 0,
-    fort : 0,
-    will : 0,
-  };
+    forca : 10, 
+    destreza : 10,
+    constituicao : 10,
+    inteligencia : 10,
+    sabedoria : 10,
+    carisma : 10,
+    dano : 0,
+    ataque : 0,
+    defesa : 0,
+    vida : 0,
+    iniciativa : 0,
+    resistencia : 0,
+    reflexo : 0,
+    fortitude : 0,
+    vontade : 0,
+  }; 
 
   constructor( private keysProvider: KeysProvider ) {
     console.log('PersonaProvider');
@@ -35,7 +35,7 @@ export class PersonaProvider {
   }
 
   getTotalPoints(persona: Persona): TotalPoints {
-    let total: TotalPoints = {ability:0, combat:0, all:0};
+    let total: TotalPoints = {ability:0, combat:0, saving:0, all:0};
     
     for(let key of this.keysProvider.abilityKeys) {
       total.ability += persona[key.name];
@@ -46,18 +46,28 @@ export class PersonaProvider {
       total.combat += persona[key.name];
     }
 
-    total.all = total.ability + total.combat;
+    for(let key of this.keysProvider.savingKeys) {
+      total.saving += persona[key.name];
+    }  
+
+    total.all = total.ability + total.combat + total.saving;
     return total;
   }
 
   getBonusPoints(persona: Persona) {
-    let bonus = {damage:0, attack:0, defense:0, life:0, haste:0};
+    let bonus = { dano:0, ataque:0, defesa:0, vida:0, iniciativa:0, 
+                  resistencia:0, reflexo:0, fortitude:0, vontade:0 };
 
-    bonus.damage = (persona.damage+(persona.for-10))/2;
-    bonus.attack = persona.attack/2;
-    bonus.defense = 10 + (persona.defense/2);
-    bonus.life = persona.con + (persona.con-10)/2 + persona.life + persona.np;
-    bonus.haste = persona.haste + (persona.des-10)/2;
+    bonus.dano = (persona.dano+(persona.forca-10))/2;
+    bonus.ataque = persona.ataque/2;
+    bonus.defesa = 10 + (persona.defesa/2);
+    bonus.vida = persona.constituicao + (persona.constituicao-10)/2 + persona.vida + persona.np;
+    bonus.iniciativa = persona.iniciativa + (persona.destreza-10)/2;
+
+    bonus.resistencia = persona.resistencia + (persona.constituicao-10)/2;
+    bonus.reflexo = persona.reflexo + (persona.destreza-10)/2;
+    bonus.fortitude = persona.fortitude + (persona.constituicao-10)/2;
+    bonus.vontade = persona.vontade + (persona.sabedoria-10)/2;
 
     return bonus;
   }
