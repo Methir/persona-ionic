@@ -67,8 +67,6 @@ export class PersonaPage {
     );
   }
 
-  isHidden(element){
-    console.log(element);
-  }
+  
 
 }

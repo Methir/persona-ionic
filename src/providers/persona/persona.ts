@@ -24,7 +24,46 @@ export class PersonaProvider {
     reflexo : 0,
     fortitude : 0,
     vontade : 0,
-  }; 
+  };
+  
+  private personas: Persona[] = [{
+    name : 'Ninja',
+    np : 3,
+    forca : 12, 
+    destreza : 18,
+    constituicao : 14,
+    inteligencia : 12,
+    sabedoria : 14,
+    carisma : 10,
+    dano : 2,
+    ataque : 8,
+    defesa : 12,
+    vida : 0,
+    iniciativa : 1,
+    resistencia : 0,
+    reflexo : 2,
+    fortitude : 0,
+    vontade : 0,
+  },
+  {
+    name : 'Warrior',
+    np : 3,
+    forca : 18, 
+    destreza : 14,
+    constituicao : 18,
+    inteligencia : 10,
+    sabedoria : 12,
+    carisma : 12,
+    dano : 0,
+    ataque : 8,
+    defesa : 8,
+    vida : 0,
+    iniciativa : 0,
+    resistencia : 1,
+    reflexo : 0,
+    fortitude : 1,
+    vontade : 3,
+  }]; 
 
   constructor( private keysProvider: KeysProvider ) {
     console.log('PersonaProvider');
