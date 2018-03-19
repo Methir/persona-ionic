@@ -4,13 +4,13 @@
     <ng-content></ng-content>
     <ion-badge>{{ value }}pp</ion-badge>
   </ion-label>
-  <button ion-button color="danger" 
-          icon-only item-end clear
+  <button ion-fab color="danger" 
+          item-end mini
           (click)="decrement()">
     <ion-icon name="remove"></ion-icon>
   </button>
-  <button ion-button color="secondary" 
-          icon-only item-end clear
+  <button ion-fab color="secondary" 
+          item-end mini
           (click)="increment()">
     <ion-icon name="add"></ion-icon>
   </button>
