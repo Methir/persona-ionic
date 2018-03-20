@@ -6,7 +6,6 @@ import { MyApp } from './app.component';
 
 import { PersonaPageModule } from './../pages/persona/persona.module';
 import { HomePageModule } from '../pages/home/home.module';
-import { TabsPage } from '../pages/tabs/tabs';
 import { KeysProvider } from '../providers/keys/keys';
 import { PersonaProvider } from '../providers/persona/persona';
 
@@ -16,7 +15,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 @NgModule({
   declarations: [
     MyApp,
-    TabsPage
   ],
   imports: [
     BrowserModule,
@@ -28,7 +26,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    TabsPage
   ],
   providers: [
     StatusBar,
