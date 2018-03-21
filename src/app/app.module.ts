@@ -14,6 +14,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPageModule } from '../pages/login/login.module';
 import { AuthProvider } from '../providers/auth/auth';
+import { HelperProvider } from '../providers/helper/helper';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { AuthProvider } from '../providers/auth/auth';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     KeysProvider,
     PersonaProvider,
-    AuthProvider
+    AuthProvider,
+    HelperProvider
   ]
 })
 export class AppModule {}

@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 
+import { Key } from './../../interfaces/key';
+
 @Injectable()
 export class KeysProvider {
 
-  get abilityKeys(): any[] {
+  get abilityKeys(): Key[] {
     return [
       { label : "Força", name : "forca" },
       { label : "Destreza", name : "destreza" }, 
@@ -14,7 +16,7 @@ export class KeysProvider {
     ];
   }
 
-  get combatKeys(): any[] {
+  get combatKeys(): Key[] {
     return [
       { label : "Dano", name : "dano" },
       { label : "Ataque", name : "ataque" },
@@ -24,7 +26,7 @@ export class KeysProvider {
     ];
   }
 
-  get savingKeys(): any[] {
+  get savingKeys(): Key[] {
     return [
       { label : "Resistência", name : "resistencia"},
       { label : "Reflexo", name : "reflexo"},

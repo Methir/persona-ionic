@@ -1,8 +1,10 @@
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { MenuPage } from './../menu/menu';
+import { HelperProvider } from './../../providers/helper/helper';
+import { AuthProvider } from './../../providers/auth/auth';
 
 @IonicPage()
 @Component({
@@ -16,7 +18,8 @@ export class LoginPage {
   constructor(  public navCtrl: NavController, 
                 public navParams: NavParams, 
                 private formBuilder: FormBuilder,
-                private toastCtrl: ToastController ) { }
+                private helperProvider: HelperProvider,
+                private authProvider: AuthProvider ) { }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
@@ -28,7 +31,7 @@ export class LoginPage {
         Validators.required,
         Validators.email,
       ] ],
-      password: [ null, [
+      senha: [ null, [
         Validators.required,
         Validators.minLength(4),
         Validators.maxLength(8),
@@ -38,20 +41,20 @@ export class LoginPage {
 
   onSubmit() {
     if (this.forms.invalid) {
-      this.alertToast('O email e senha são campos necessários. Verifique se foram preenchidos corretamente.');
+      this.helperProvider.alertToast('O email e senha são campos necessários. Verifique se foram preenchidos corretamente.');
     } else {
-      this.navCtrl.push(MenuPage);
+      this.authProvider.authenticate(this.forms)
+      .subscribe(
+        (data) => {
+          console.log(data);
+          this.navCtrl.push(MenuPage);
+        },
+        (erro) => {
+          console.log(erro);
+          this.helperProvider.alertToast('Erro ao tentar acessar o sistema. Nem tente mais, que deu ruim. xD')
+        }
+      );
     }
-  }
-
-  alertToast(message) {
-    let toast = this.toastCtrl.create({
-      message: message,
-      position: 'top',
-      closeButtonText: 'Ok!',
-      showCloseButton: true
-    });
-    toast.present();
   }
 
 }

@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { TotalPoints } from './../../interfaces/total-points';
 import { KeysProvider } from './../keys/keys';
 import { Injectable } from '@angular/core';
@@ -5,6 +6,8 @@ import { Persona } from '../../interfaces/persona';
 
 @Injectable()
 export class PersonaProvider {
+
+  baseUrl: string = 'https://httpbin.org';
 
   private persona: Persona = {
     name : 'noob',
@@ -27,6 +30,7 @@ export class PersonaProvider {
   };
   
   private personas: Persona[] = [{
+    id: 1,
     name : 'Ninja',
     np : 3,
     forca : 12, 
@@ -46,6 +50,7 @@ export class PersonaProvider {
     vontade : 0,
   },
   {
+    id: 2,
     name : 'Warrior',
     np : 3,
     forca : 18, 
@@ -65,12 +70,17 @@ export class PersonaProvider {
     vontade : 3,
   }]; 
 
-  constructor( private keysProvider: KeysProvider ) {
+  constructor(  public http: HttpClient, 
+                private keysProvider: KeysProvider ) {
     console.log('PersonaProvider');
   }
 
   getPersona() {
     return this.persona;
+  }
+
+  syncAccount() {
+    return this.http.post(`${this.baseUrl}/post`, JSON.stringify(this.personas));
   }
 
   getTotalPoints(persona: Persona): TotalPoints {

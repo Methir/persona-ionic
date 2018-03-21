@@ -12,4 +12,15 @@
   <ion-fab top right edge>
     <button ion-fab color="secondary"><ion-icon name="person-add"></ion-icon></button>
   </ion-fab>
+  <ion-grid>
+    <ion-row justify-content-right>
+      <ion-col col-12 col-ms-4 col-md-4 col-lg-4 col-xl-4>
+        <ion-list inset>
+          <button ion-item *ngFor="let persona of personas">
+            {{ persona.name }}
+          </button> 
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
