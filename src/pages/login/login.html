@@ -26,7 +26,10 @@
                 <ion-input type="password" formControlName="senha"></ion-input>
               </ion-item>  
 
-              <button type="submit" ion-button round large>Entrar</button>
+              <button type="submit" [disabled]="forms.invalid"
+                      ion-button round large>
+                Entrar
+              </button>
 
             </ion-list>
           </form>

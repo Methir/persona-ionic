@@ -75,8 +75,21 @@ export class PersonaProvider {
     console.log('PersonaProvider');
   }
 
-  getPersona() {
+  getNewPersona() {
     return this.persona;
+  }
+
+  updatePersona(persona: Persona) {
+    this.personas = this.personas.map((p) => {
+      console.log(persona);
+      if (p.id == persona.id){
+        return persona;
+      } else {
+        return p
+      }
+    });
+    console.log(this.personas);
+    return this.http.put(`${this.baseUrl}/put`, persona);
   }
 
   syncAccount() {

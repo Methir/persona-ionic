@@ -1,20 +1,25 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
     <ion-title>Persona</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-fab top right edge>
-    <button ion-fab color="primary"><ion-icon name="person"></ion-icon></button>
+    <button ion-fab color="primary">
+      <ion-icon name="person"></ion-icon>
+    </button>
     <ion-fab-list side="bottom">
-      <button ion-fab color="secondary"><ion-icon name="cloud-upload"></ion-icon></button>
-      <button ion-fab color="danger"><ion-icon name="trash"></ion-icon></button>
+      <button ion-fab color="secondary" 
+              (click)="savePersona()" [disabled]="forms.invalid">
+        <ion-icon name="cloud-upload"></ion-icon>
+      </button>
+      <button ion-fab color="danger">
+        <ion-icon name="trash"></ion-icon>
+      </button>
     </ion-fab-list>
   </ion-fab>
+
   <ion-grid>
     <form [formGroup]="forms">
       <!-- Open Header Part -->

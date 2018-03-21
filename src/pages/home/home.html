@@ -16,8 +16,10 @@
     <ion-row justify-content-right>
       <ion-col col-12 col-ms-4 col-md-4 col-lg-4 col-xl-4>
         <ion-list inset>
-          <button ion-item *ngFor="let persona of personas">
+          <button ion-item *ngFor="let persona of personas"
+                  [navPush]="personaPage" [navParams]="persona">
             {{ persona.name }}
+            <p>Nível de campanha: {{persona.np}}</p>
           </button> 
         </ion-list>
       </ion-col>

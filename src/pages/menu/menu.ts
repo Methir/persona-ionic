@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Nav } from 'ionic-angular';
 
-import { PersonaPage } from '../persona/persona';
 import { HomePage } from './../home/home';
 
 @IonicPage()
@@ -20,7 +19,6 @@ export class MenuPage {
                 public navParams: NavParams ) {
     this.pages = [
       { title: 'Home', component: HomePage },
-      { title: 'Persona', component: PersonaPage },
     ];
   }
 

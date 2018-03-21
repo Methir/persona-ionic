@@ -1,3 +1,4 @@
+import { PersonaPage } from './../persona/persona';
 import { HelperProvider } from './../../providers/helper/helper';
 import { LoginPage } from './../login/login';
 import { Component } from '@angular/core';
@@ -13,6 +14,7 @@ import { Persona } from './../../interfaces/persona';
 })
 export class HomePage {
 
+  personaPage: any = PersonaPage;
   personas: Persona[];
 
   constructor(  public navCtrl: NavController, 
@@ -28,7 +30,7 @@ export class HomePage {
     this.PersonaProvider.syncAccount()
     .subscribe(
       (data) => {
-        console.log(data);
+        console.log('sincronizado com sucesso');
         this.personas = JSON.parse(data['data']);
       },
       (erro) => {

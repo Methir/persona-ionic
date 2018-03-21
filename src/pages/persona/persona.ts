@@ -1,6 +1,9 @@
+import { HomePage } from './../home/home';
+import { HelperProvider } from './../../providers/helper/helper';
+import { Key } from './../../interfaces/key';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Persona } from './../../interfaces/persona';
 import { PersonaProvider } from '../../providers/persona/persona';
@@ -18,13 +21,14 @@ export class PersonaPage {
   persona: Persona;
   totalPoints: TotalPoints;
   bonusPoints: any;
-  abilityKeys: any[];
-  combatKeys: any[];
-  savingKeys: any[];
+  abilityKeys: Key[];
+  combatKeys: Key[];
+  savingKeys: Key[];
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               private formBuilder: FormBuilder,
+              private helperProvider: HelperProvider,
               private keysProvider: KeysProvider,
               private personaProvider: PersonaProvider ) {
     this.abilityKeys = this.keysProvider.abilityKeys;
@@ -37,27 +41,31 @@ export class PersonaPage {
   }
 
   ngOnInit() {
-    this.persona = this.personaProvider.getPersona();
+    this.persona = this.navParams.data;
     this.totalPoints = this.personaProvider.getTotalPoints(this.persona);
     this.bonusPoints = this.personaProvider.getBonusPoints(this.persona);
     this.forms = this.formBuilder.group({
-      name : [this.persona.name],
-      np : [this.persona.np],
-      forca : [this.persona.forca],
-      destreza : [this.persona.destreza],
-      constituicao : [this.persona.constituicao],
-      inteligencia : [this.persona.inteligencia],
-      sabedoria : [this.persona.sabedoria],
-      carisma : [this.persona.carisma],
-      dano : [this.persona.dano],
-      ataque : [this.persona.ataque],
-      defesa : [this.persona.defesa],
-      vida : [this.persona.vida],
-      iniciativa : [this.persona.iniciativa],
-      resistencia : [this.persona.resistencia],
-      reflexo : [this.persona.reflexo],
-      fortitude : [this.persona.fortitude],
-      vontade : [this.persona.vontade],
+      id : [this.persona.id],
+      name : [ this.persona.name,
+        [ Validators.required,
+          Validators.min(4),
+          Validators.max(8)] ],
+      np : [this.persona.np, Validators.required],
+      forca : [ this.persona.forca, Validators.required],
+      destreza : [this.persona.destreza, Validators.required],
+      constituicao : [this.persona.constituicao, Validators.required],
+      inteligencia : [this.persona.inteligencia, Validators.required],
+      sabedoria : [this.persona.sabedoria, Validators.required],
+      carisma : [this.persona.carisma, Validators.required],
+      dano : [this.persona.dano, Validators.required],
+      ataque : [this.persona.ataque, Validators.required],
+      defesa : [this.persona.defesa, Validators.required],
+      vida : [this.persona.vida, Validators.required],
+      iniciativa : [this.persona.iniciativa, Validators.required],
+      resistencia : [this.persona.resistencia, Validators.required],
+      reflexo : [this.persona.reflexo, Validators.required],
+      fortitude : [this.persona.fortitude, Validators.required],
+      vontade : [this.persona.vontade, Validators.required],
     });
     this.forms.valueChanges.subscribe(
       (persona) => {
@@ -67,6 +75,23 @@ export class PersonaPage {
     );
   }
 
+  savePersona() {
+    if (this.forms.invalid) {
+      this.helperProvider.alertToast('Formulário invalido! Tente novamenteou refaça.');
+    } else {
+      this.personaProvider.updatePersona(this.forms.value)
+      .subscribe(
+        (data) => {
+          console.log('salvo com sucesso');
+          //this.personaProvider.syncAccount();
+          this.navCtrl.push(HomePage);
+        },
+        (erro) => {
+          console.log(erro);
+          this.navCtrl.push(HomePage);
+        }
+      );
+    }
+  }
   
-
 }
