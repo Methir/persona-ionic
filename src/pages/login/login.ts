@@ -1,12 +1,8 @@
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { MenuPage } from './../menu/menu';
 
 @IonicPage()
 @Component({
@@ -15,11 +11,47 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class LoginPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  forms: FormGroup;
+
+  constructor(  public navCtrl: NavController, 
+                public navParams: NavParams, 
+                private formBuilder: FormBuilder,
+                private toastCtrl: ToastController ) { }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
+  }
+
+  ngOnInit() {
+    this.forms = this.formBuilder.group({
+      email: [ null, [
+        Validators.required,
+        Validators.email,
+      ] ],
+      password: [ null, [
+        Validators.required,
+        Validators.minLength(4),
+        Validators.maxLength(8),
+      ] ],
+    });
+  }
+
+  onSubmit() {
+    if (this.forms.invalid) {
+      this.alertToast('O email e senha são campos necessários. Verifique se foram preenchidos corretamente.');
+    } else {
+      this.navCtrl.push(MenuPage);
+    }
+  }
+
+  alertToast(message) {
+    let toast = this.toastCtrl.create({
+      message: message,
+      position: 'top',
+      closeButtonText: 'Ok!',
+      showCloseButton: true
+    });
+    toast.present();
   }
 
 }

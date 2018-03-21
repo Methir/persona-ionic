@@ -1,11 +1,11 @@
-import { TotalPoints } from './../../interfaces/total-points';
-import { KeysProvider } from './../../providers/keys/keys';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { Persona } from './../../interfaces/persona';
 import { PersonaProvider } from '../../providers/persona/persona';
+import { TotalPoints } from './../../interfaces/total-points';
+import { KeysProvider } from './../../providers/keys/keys';
 
 @IonicPage()
 @Component({

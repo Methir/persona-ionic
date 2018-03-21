@@ -1,3 +1,4 @@
+import { MenuPageModule } from './../pages/menu/menu.module';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
@@ -11,6 +12,8 @@ import { PersonaProvider } from '../providers/persona/persona';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { LoginPageModule } from '../pages/login/login.module';
+import { AuthProvider } from '../providers/auth/auth';
 
 @NgModule({
   declarations: [
@@ -21,6 +24,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HttpClientModule,
     HomePageModule,
     PersonaPageModule,
+    MenuPageModule,
+    LoginPageModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -32,7 +37,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     KeysProvider,
-    PersonaProvider
+    PersonaProvider,
+    AuthProvider
   ]
 })
 export class AppModule {}

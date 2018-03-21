@@ -1,7 +1,7 @@
-import { TruncateNumberPipe } from './../pipes/truncate-number.pipe';
 import { NgModule } from '@angular/core';
 import { IonicModule } from 'ionic-angular';
 
+import { TruncateNumberPipe } from './../pipes/truncate-number.pipe';
 import { NamePersonaComponent } from './persona/header/name-persona/name-persona';
 import { NpPersonaComponent } from './persona/header/np-persona/np-persona';
 import { PpPersonaComponent } from './persona/header/pp-persona/pp-persona';
@@ -20,7 +20,7 @@ import { AttributePersonaComponent } from './persona/attribute-persona/attribute
     	FormDebugComponent,
     	InfoDebugComponent,
 		AttributePersonaComponent,
-		TruncateNumberPipe
+		TruncateNumberPipe,
 	],
 	imports: [
 		IonicModule
@@ -33,7 +33,7 @@ import { AttributePersonaComponent } from './persona/attribute-persona/attribute
     	FormDebugComponent,
     	InfoDebugComponent,
 		AttributePersonaComponent,
-		TruncateNumberPipe
+		TruncateNumberPipe,
 	]
 })
-export class ComponentsModule {}
+export class ComponentsModule { }
