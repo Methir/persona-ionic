@@ -41,17 +41,17 @@ export class LoginPage {
 
   onSubmit() {
     if (this.forms.invalid) {
-      this.helperProvider.alertToast('O email e senha são campos necessários. Verifique se foram preenchidos corretamente.');
+      this.helperProvider.persistAlert('O email e senha são campos necessários. Verifique se foram preenchidos corretamente.');
     } else {
       this.authProvider.authenticate(this.forms)
       .subscribe(
         (data) => {
           console.log(data);
-          this.navCtrl.push(MenuPage);
+          this.navCtrl.setRoot(MenuPage);
         },
         (erro) => {
           console.log(erro);
-          this.helperProvider.alertToast('Erro ao tentar acessar o sistema. Nem tente mais, que deu ruim. xD')
+          this.helperProvider.persistAlert('Erro ao tentar acessar o sistema. Nem tente mais, que deu ruim. xD')
         }
       );
     }

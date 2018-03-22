@@ -15,6 +15,7 @@ import { Persona } from './../../interfaces/persona';
 export class HomePage {
 
   personaPage: any = PersonaPage;
+  newPersona: Persona;
   personas: Persona[];
 
   constructor(  public navCtrl: NavController, 
@@ -27,15 +28,20 @@ export class HomePage {
   }
 
   ngOnInit() {
+    let loading = this.helperProvider.createLoad();
+    loading.present();
+    this.newPersona = this.PersonaProvider.getNewPersona();
     this.PersonaProvider.syncAccount()
     .subscribe(
       (data) => {
         console.log('sincronizado com sucesso');
         this.personas = JSON.parse(data['data']);
+        loading.dismiss();
       },
       (erro) => {
         console.log(erro);
-        this.helperProvider.alertToast('Você foi desconectado!');
+        loading.dismiss();
+        this.helperProvider.persistAlert('Você foi desconectado!');
         this.navCtrl.push(LoginPage);
       }
     );

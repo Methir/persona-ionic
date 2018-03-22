@@ -1,3 +1,4 @@
+import { HelperProvider } from './../helper/helper';
 import { HttpClient } from '@angular/common/http';
 import { TotalPoints } from './../../interfaces/total-points';
 import { KeysProvider } from './../keys/keys';
@@ -9,7 +10,7 @@ export class PersonaProvider {
 
   baseUrl: string = 'https://httpbin.org';
 
-  private persona: Persona = {
+  private newPersona: Persona = {
     name : 'noob',
     np : 0,
     forca : 10, 
@@ -70,25 +71,32 @@ export class PersonaProvider {
     vontade : 3,
   }]; 
 
-  constructor(  public http: HttpClient, 
+  constructor(  public http: HttpClient,
+                private helperProvider: HelperProvider, 
                 private keysProvider: KeysProvider ) {
     console.log('PersonaProvider');
   }
 
   getNewPersona() {
-    return this.persona;
+    return this.newPersona;
   }
 
-  updatePersona(persona: Persona) {
-    this.personas = this.personas.map((p) => {
+  savePersona(persona: Persona) {
+    if(persona.id){
+      this.personas = this.personas.map((p) => {
+        if (p.id == persona.id){
+          return persona;
+        } else {
+          return p
+        }
+      });
+    }else{
+      let id: number = this.personas.slice(-1)[0].id;
+      persona.id = ++id;
       console.log(persona);
-      if (p.id == persona.id){
-        return persona;
-      } else {
-        return p
-      }
-    });
-    console.log(this.personas);
+      this.personas.push(persona); 
+      console.log(this.personas);
+    }
     return this.http.put(`${this.baseUrl}/put`, persona);
   }
 
@@ -99,19 +107,10 @@ export class PersonaProvider {
   getTotalPoints(persona: Persona): TotalPoints {
     let total: TotalPoints = {ability:0, combat:0, saving:0, all:0};
     
-    for(let key of this.keysProvider.abilityKeys) {
-      total.ability += persona[key.name];
-    }
+    total.ability = this.helperProvider.sumKeys(persona, this.keysProvider.abilityKeys);
     total.ability -= 60;
-
-    for(let key of this.keysProvider.combatKeys) {
-      total.combat += persona[key.name];
-    }
-
-    for(let key of this.keysProvider.savingKeys) {
-      total.saving += persona[key.name];
-    }  
-
+    total.combat = this.helperProvider.sumKeys(persona, this.keysProvider.combatKeys);
+    total.saving = this.helperProvider.sumKeys(persona, this.keysProvider.savingKeys);
     total.all = total.ability + total.combat + total.saving;
     return total;
   }

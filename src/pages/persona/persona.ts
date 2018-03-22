@@ -1,14 +1,16 @@
-import { HomePage } from './../home/home';
-import { HelperProvider } from './../../providers/helper/helper';
-import { Key } from './../../interfaces/key';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { Key } from './../../interfaces/key';
 import { Persona } from './../../interfaces/persona';
-import { PersonaProvider } from '../../providers/persona/persona';
 import { TotalPoints } from './../../interfaces/total-points';
+
+import { MenuPage } from './../menu/menu';
+
+import { PersonaProvider } from '../../providers/persona/persona';
 import { KeysProvider } from './../../providers/keys/keys';
+import { HelperProvider } from './../../providers/helper/helper';
 
 @IonicPage()
 @Component({
@@ -77,18 +79,17 @@ export class PersonaPage {
 
   savePersona() {
     if (this.forms.invalid) {
-      this.helperProvider.alertToast('Formulário invalido! Tente novamenteou refaça.');
+      this.helperProvider.persistAlert('Formulário invalido! Tente novamenteou refaça.');
     } else {
-      this.personaProvider.updatePersona(this.forms.value)
+      this.personaProvider.savePersona(this.forms.value)
       .subscribe(
         (data) => {
-          console.log('salvo com sucesso');
-          //this.personaProvider.syncAccount();
-          this.navCtrl.push(HomePage);
+          this.helperProvider.timeAlert('Salvo com sucesso!');
+          this.navCtrl.push(MenuPage);
         },
         (erro) => {
           console.log(erro);
-          this.navCtrl.push(HomePage);
+          this.helperProvider.persistAlert('Erro ao tentar salvar! Algo de errado não está certo.');
         }
       );
     }

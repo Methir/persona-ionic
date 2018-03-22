@@ -1,3 +1,4 @@
+import { LoginPage } from './../login/login';
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Nav } from 'ionic-angular';
 
@@ -28,5 +29,9 @@ export class MenuPage {
 
   openPage(page) {
     this.nav.setRoot(page.component);
+  }
+
+  logout() {
+    this.nav.setRoot(LoginPage);
   }
 }
