@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { HomePage } from './../pages/home/home';
+import { Component, ViewChild } from '@angular/core';
+import { Platform, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -9,9 +10,18 @@ import { LoginPage } from './../pages/login/login';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage: any = LoginPage;
+  @ViewChild(Nav) nav: Nav;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  rootPage: any = HomePage;
+  
+  pages: Array<{title: string, component: any}>;
+
+  constructor(  public platform: Platform, 
+                public statusBar: StatusBar, 
+                public splashScreen: SplashScreen ) {
+    this.pages = [
+      { title: 'Home', component: HomePage },
+    ];
     this.initializeApp();
   }
 
@@ -22,5 +32,13 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+  }
+
+  openPage(page) {
+    this.nav.setRoot(page.component);
+  }
+
+  logout() {
+    this.nav.push(LoginPage);
   }
 }

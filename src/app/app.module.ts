@@ -1,4 +1,3 @@
-import { MenuPageModule } from './../pages/menu/menu.module';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
@@ -25,7 +24,6 @@ import { HelperProvider } from '../providers/helper/helper';
     HttpClientModule,
     HomePageModule,
     PersonaPageModule,
-    MenuPageModule,
     LoginPageModule,
     IonicModule.forRoot(MyApp)
   ],

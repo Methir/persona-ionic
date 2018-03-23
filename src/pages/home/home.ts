@@ -2,7 +2,7 @@ import { PersonaPage } from './../persona/persona';
 import { HelperProvider } from './../../providers/helper/helper';
 import { LoginPage } from './../login/login';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Loading } from 'ionic-angular';
 
 import { PersonaProvider } from './../../providers/persona/persona';
 import { Persona } from './../../interfaces/persona';
@@ -25,12 +25,12 @@ export class HomePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');
+    this.newPersona = this.PersonaProvider.getNewPersona();
   }
 
-  ngOnInit() {
+  ionViewDidEnter() {
     let loading = this.helperProvider.createLoad();
     loading.present();
-    this.newPersona = this.PersonaProvider.getNewPersona();
     this.PersonaProvider.syncAccount()
     .subscribe(
       (data) => {

@@ -6,8 +6,6 @@ import { Key } from './../../interfaces/key';
 import { Persona } from './../../interfaces/persona';
 import { TotalPoints } from './../../interfaces/total-points';
 
-import { MenuPage } from './../menu/menu';
-
 import { PersonaProvider } from '../../providers/persona/persona';
 import { KeysProvider } from './../../providers/keys/keys';
 import { HelperProvider } from './../../providers/helper/helper';
@@ -85,7 +83,7 @@ export class PersonaPage {
       .subscribe(
         (data) => {
           this.helperProvider.timeAlert('Salvo com sucesso!');
-          this.navCtrl.push(MenuPage);
+          this.navCtrl.pop();
         },
         (erro) => {
           console.log(erro);

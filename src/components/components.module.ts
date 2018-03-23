@@ -9,6 +9,7 @@ import { AbilityPersonaComponent } from './persona/ability-persona/ability-perso
 import { FormDebugComponent } from './form-debug/form-debug';
 import { InfoDebugComponent } from './info-debug/info-debug';
 import { AttributePersonaComponent } from './persona/attribute-persona/attribute-persona';
+import { CardPersonaComponent } from './persona/card-persona/card-persona';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { AttributePersonaComponent } from './persona/attribute-persona/attribute
     	InfoDebugComponent,
 		AttributePersonaComponent,
 		TruncateNumberPipe,
+    	CardPersonaComponent,
 	],
 	imports: [
 		IonicModule
@@ -34,6 +36,7 @@ import { AttributePersonaComponent } from './persona/attribute-persona/attribute
     	InfoDebugComponent,
 		AttributePersonaComponent,
 		TruncateNumberPipe,
+    	CardPersonaComponent,
 	]
 })
 export class ComponentsModule { }

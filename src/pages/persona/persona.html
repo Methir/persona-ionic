@@ -23,24 +23,19 @@
   <ion-grid>
     <form [formGroup]="forms">
       <!-- Open Header Part -->
-      <ion-card>
-        <ion-list>
-          <ion-list-header (click)="header.hidden = !header.hidden" text-center>
-            <a>Header({{totalPoints.all}}pp)</a>
-          </ion-list-header>
-          <ion-row #header>
-            <ion-col col-12 col-ms-4 col-md-4 col-lg-4 col-xl-4>
-              <name-persona formControlName="name"></name-persona>
-            </ion-col>
-            <ion-col col-12 col-ms-4 col-md-4 col-lg-4 col-xl-4>
-              <np-persona formControlName="np"></np-persona>
-            </ion-col>
-            <ion-col col-12 col-ms-4 col-md-4 col-lg-4 col-xl-4>
-              <pp-persona [ppTotal]="totalPoints.all"></pp-persona>
-            </ion-col>
-          </ion-row>
-        </ion-list>
-      </ion-card>
+      <card-persona label="Cabeçalho" [points]="totalPoints.all">
+        <ion-row>
+          <ion-col col-12 col-ms-4 col-md-4 col-lg-4 col-xl-4>
+            <name-persona formControlName="name"></name-persona>
+          </ion-col>
+          <ion-col col-12 col-ms-4 col-md-4 col-lg-4 col-xl-4>
+            <np-persona formControlName="np"></np-persona>
+          </ion-col>
+          <ion-col col-12 col-ms-4 col-md-4 col-lg-4 col-xl-4>
+            <pp-persona [ppTotal]="totalPoints.all"></pp-persona>
+          </ion-col>
+        </ion-row>
+      </card-persona>
       <!-- Close Header Part -->
       <!-- Open Ability Part -->
       <ion-card>
@@ -62,12 +57,8 @@
       <!-- Open Combat Part -->
       <ion-row>
         <ion-col col-12 col-ms-12 col-md-12 col-lg-6 col-xl-6>
-          <ion-card>
-            <ion-list>
-            <ion-list-header (click)="combat.hidden = !combat.hidden" text-center>
-              <a>Combate({{ totalPoints.combat }}pp)</a>
-            </ion-list-header>
-            <ion-row #combat>
+          <card-persona label="Combate" [points]="totalPoints.combat">
+            <ion-row>
               <ion-col  col-12 col-ms-6 col-md-6 col-lg-6 col-xl-6 
                         *ngFor="let combatKey of combatKeys">
                 <attribute-persona  [label]="combatKey.label" 
@@ -76,18 +67,13 @@
                 </attribute-persona>
               </ion-col>
             </ion-row>
-          </ion-list>  
-          </ion-card>
+          </card-persona>
         </ion-col>
       <!-- Close Combat Part -->
       <!-- Open Salving Part -->
         <ion-col col-12 col-ms-12 col-md-12 col-lg-6 col-xl-6>
-          <ion-card>
-            <ion-list>
-            <ion-list-header (click)="saving.hidden = !saving.hidden" text-center>
-              <a>Salvamentos({{ totalPoints.saving }}pp)</a>
-            </ion-list-header>
-            <ion-row #saving>
+          <card-persona label="Salvamentos" [points]="totalPoints.saving">
+            <ion-row>
               <ion-col  col-12 col-ms-6 col-md-6 col-lg-6 col-xl-6
                         *ngFor="let savingKey of savingKeys">
                 <attribute-persona  [label]="savingKey.label" 
@@ -96,8 +82,7 @@
                 </attribute-persona>
               </ion-col>
             </ion-row>
-          </ion-list>  
-          </ion-card>
+          </card-persona>
         </ion-col>
       </ion-row>
       <!-- Close Saving Part -->

@@ -2,7 +2,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import { MenuPage } from './../menu/menu';
 import { HelperProvider } from './../../providers/helper/helper';
 import { AuthProvider } from './../../providers/auth/auth';
 
@@ -47,7 +46,7 @@ export class LoginPage {
       .subscribe(
         (data) => {
           console.log(data);
-          this.navCtrl.setRoot(MenuPage);
+          this.navCtrl.pop();
         },
         (erro) => {
           console.log(erro);
