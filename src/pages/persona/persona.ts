@@ -2,13 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { Key } from './../../interfaces/key';
-import { Persona } from './../../interfaces/persona';
-import { TotalPoints } from './../../interfaces/total-points';
-
-import { PersonaProvider } from '../../providers/persona/persona';
-import { KeysProvider } from './../../providers/keys/keys';
-import { HelperProvider } from './../../providers/helper/helper';
+import { Key, Persona, TotalPoints } from './../../interfaces';
+import { PersonaProvider, KeysProvider, HelperProvider, AuthProvider } from '../../providers';
 
 @IonicPage()
 @Component({
@@ -28,6 +23,7 @@ export class PersonaPage {
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               private formBuilder: FormBuilder,
+              private authProvider: AuthProvider,
               private helperProvider: HelperProvider,
               private keysProvider: KeysProvider,
               private personaProvider: PersonaProvider ) {
@@ -46,10 +42,10 @@ export class PersonaPage {
     this.bonusPoints = this.personaProvider.getBonusPoints(this.persona);
     this.forms = this.formBuilder.group({
       id : [this.persona.id],
-      name : [ this.persona.name,
+      nome : [ this.persona.nome,
         [ Validators.required,
           Validators.min(4),
-          Validators.max(8)] ],
+          Validators.max(20)] ],
       np : [this.persona.np, Validators.required],
       forca : [ this.persona.forca, Validators.required],
       destreza : [this.persona.destreza, Validators.required],
@@ -77,19 +73,43 @@ export class PersonaPage {
 
   savePersona() {
     if (this.forms.invalid) {
-      this.helperProvider.persistAlert('Formulário invalido! Tente novamenteou refaça.');
+      this.helperProvider.persistAlert('Formulário invalido! Tente novamente ßou refaça.');
     } else {
       this.personaProvider.savePersona(this.forms.value)
       .subscribe(
         (data) => {
+          console.log(data);
           this.helperProvider.timeAlert('Salvo com sucesso!');
+          this.authProvider.authUser.next(this.authProvider.authUser.getValue());
           this.navCtrl.pop();
         },
         (erro) => {
           console.log(erro);
+          console.log(erro.error.message);
+          //this.authProvider.authUser.next(null);
           this.helperProvider.persistAlert('Erro ao tentar salvar! Algo de errado não está certo.');
-        }
-      );
+      });
+    }
+  }
+
+  deletePersona() {
+    if (this.persona.id) {
+      this.personaProvider.deletePersona(this.persona.id)
+      .subscribe(
+        (data) => {
+          console.log(data);
+          this.helperProvider.timeAlert('Salvo com sucesso!');
+          this.authProvider.authUser.next(this.authProvider.authUser.getValue());
+          this.navCtrl.pop();
+        },
+        (erro) => {
+          console.log(erro);
+          console.log(erro.error.message);
+          //this.authProvider.authUser.next(null);
+          this.helperProvider.persistAlert('Erro ao tentar deletar! Algo de errado não está certo.');
+      });
+    }else{
+      this.navCtrl.pop();
     }
   }
   

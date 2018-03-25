@@ -1,11 +1,10 @@
-import { PersonaPage } from './../persona/persona';
-import { HelperProvider } from './../../providers/helper/helper';
-import { LoginPage } from './../login/login';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Loading } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import { PersonaProvider } from './../../providers/persona/persona';
-import { Persona } from './../../interfaces/persona';
+import { Token, Persona, httpSuccessResponse } from './../../interfaces';
+import { AuthProvider, HelperProvider, PersonaProvider } from './../../providers';
+import { PersonaPage } from './../persona/persona';
+import { LoginPage } from '../login/login';
 
 @IonicPage()
 @Component({
@@ -20,31 +19,34 @@ export class HomePage {
 
   constructor(  public navCtrl: NavController, 
                 public navParams: NavParams,
+                private authProvider: AuthProvider,
                 private helperProvider: HelperProvider,
-                private PersonaProvider: PersonaProvider ) { }
+                private personaProvider: PersonaProvider ) { }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad HomePage');
-    this.newPersona = this.PersonaProvider.getNewPersona();
-  }
-
-  ionViewDidEnter() {
-    let loading = this.helperProvider.createLoad();
-    loading.present();
-    this.PersonaProvider.syncAccount()
-    .subscribe(
-      (data) => {
-        console.log('sincronizado com sucesso');
-        this.personas = JSON.parse(data['data']);
+    console.log('pagina home carregada...');
+    this.newPersona = this.personaProvider.getNewPersona();
+    this.authProvider.seeAuthUser.subscribe( 
+      (token: Token) => {
+        let loading = this.helperProvider.createLoad();
+        loading.present();
+        if(!token){
+          this.navCtrl.push(LoginPage);
+        }else{
+          this.personaProvider.syncPersona(token).subscribe( 
+            (res: httpSuccessResponse) => {
+              console.log(res);
+              console.log('sincronizado com sucesso');
+              if(!res.erros){
+                this.personas = res.data;
+              }
+            },
+            (erro) => {
+              console.log(erro);
+          });
+        }
         loading.dismiss();
-      },
-      (erro) => {
-        console.log(erro);
-        loading.dismiss();
-        this.helperProvider.persistAlert('Você foi desconectado!');
-        this.navCtrl.push(LoginPage);
-      }
-    );
+    });
   }
 
 }

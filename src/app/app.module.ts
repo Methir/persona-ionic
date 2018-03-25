@@ -2,18 +2,16 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { MyApp } from './app.component';
-
-import { PersonaPageModule } from './../pages/persona/persona.module';
-import { HomePageModule } from '../pages/home/home.module';
-import { KeysProvider } from '../providers/keys/keys';
-import { PersonaProvider } from '../providers/persona/persona';
-
+import { IonicStorageModule } from '@ionic/storage';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+
+import { MyApp } from './app.component';
+
+import { AuthProvider, HelperProvider, KeysProvider, PersonaProvider } from '../providers';
+import { PersonaPageModule } from './../pages/persona/persona.module';
+import { HomePageModule } from '../pages/home/home.module';
 import { LoginPageModule } from '../pages/login/login.module';
-import { AuthProvider } from '../providers/auth/auth';
-import { HelperProvider } from '../providers/helper/helper';
 
 @NgModule({
   declarations: [
@@ -25,6 +23,7 @@ import { HelperProvider } from '../providers/helper/helper';
     HomePageModule,
     PersonaPageModule,
     LoginPageModule,
+    IonicStorageModule.forRoot(),
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],

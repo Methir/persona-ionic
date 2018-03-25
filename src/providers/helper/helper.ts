@@ -8,10 +8,12 @@ import { ToastController, LoadingController } from 'ionic-angular';
 @Injectable()
 export class HelperProvider {
 
+  public readonly baseUrl: string = 'http://127.0.0.1:8000';
+
   constructor(  public http: HttpClient,
                 private loadingCtrl: LoadingController,
                 private toastCtrl: ToastController ) {
-    console.log('Hello HelperProvider Provider');
+    console.log('HelperProvider');
   }
 
   createLoad()  {
@@ -26,7 +28,8 @@ export class HelperProvider {
       message: message,
       position: 'top',
       closeButtonText: 'Ok!',
-      showCloseButton: true
+      showCloseButton: true,
+      duration: 5000, 
     });
     toast.present();
   }

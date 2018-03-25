@@ -11,10 +11,13 @@
     </button>
     <ion-fab-list side="bottom">
       <button ion-fab color="secondary" 
-              (click)="savePersona()" [disabled]="forms.invalid">
+              (click)="savePersona()" [disabled]="forms.invalid"
+      > 
         <ion-icon name="cloud-upload"></ion-icon>
       </button>
-      <button ion-fab color="danger">
+      <button ion-fab color="danger"
+              (click)="deletePersona()"
+      >
         <ion-icon name="trash"></ion-icon>
       </button>
     </ion-fab-list>
@@ -26,7 +29,7 @@
       <card-persona label="Cabeçalho" [points]="totalPoints.all">
         <ion-row>
           <ion-col col-12 col-ms-4 col-md-4 col-lg-4 col-xl-4>
-            <name-persona formControlName="name"></name-persona>
+            <name-persona formControlName="nome"></name-persona>
           </ion-col>
           <ion-col col-12 col-ms-4 col-md-4 col-lg-4 col-xl-4>
             <np-persona formControlName="np"></np-persona>

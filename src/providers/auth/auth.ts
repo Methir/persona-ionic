@@ -1,24 +1,36 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { BehaviorSubject, Observable } from 'rxjs';
 
-/*
-  Generated class for the AuthProvider provider.
+import { Token } from './../../interfaces/token';
+import { HelperProvider } from './../helper/helper';
+import { PasswordClient } from './password-client';
 
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class AuthProvider {
 
-  private baseUrl: string = 'https://httpbin.org'; 
+  private baseUrl: string;
+  public authUser: BehaviorSubject<Token>; 
+  public readonly seeAuthUser: Observable<Token>; 
 
-  constructor(public http: HttpClient) {
-    console.log('Hello AuthProvider Provider');
+  constructor(  public http: HttpClient,
+                private helperProvider: HelperProvider) {
+    console.log('AuthProvider');
+    this.baseUrl = this.helperProvider.baseUrl;
+    this.authUser = new BehaviorSubject(null);
+    this.seeAuthUser = this.authUser.asObservable();
   }
 
-  authenticate(data: FormGroup) {
-    return this.http.post(`${this.baseUrl}/post`, JSON.stringify(data.value))
+  authenticate(username, password) {
+    return this.http.post<Token>(`${this.baseUrl}/oauth/token`, new PasswordClient(username, password));
+  }
+
+  getUser(token: Token): Observable<any> {
+    let headers = new HttpHeaders({
+      'Accept' : 'application/json',
+      'Authorization' : `${token.token_type} ${token.access_token}`,
+    });
+    return this.http.get(`${this.baseUrl}/api/user`, {headers: headers});
   }
 
 }

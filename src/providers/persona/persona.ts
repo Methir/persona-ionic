@@ -1,107 +1,58 @@
-import { HelperProvider } from './../helper/helper';
-import { HttpClient } from '@angular/common/http';
-import { TotalPoints } from './../../interfaces/total-points';
-import { KeysProvider } from './../keys/keys';
+import { AuthProvider } from './../auth/auth';
+import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Persona } from '../../interfaces/persona';
+
+import { Persona, httpSuccessResponse, TotalPoints, Token} from '../../interfaces';
+import { KeysProvider, HelperProvider } from './../';
+import { NewPersona } from './new-persona';
 
 @Injectable()
 export class PersonaProvider {
 
-  baseUrl: string = 'https://httpbin.org';
-
-  private newPersona: Persona = {
-    name : 'noob',
-    np : 0,
-    forca : 10, 
-    destreza : 10,
-    constituicao : 10,
-    inteligencia : 10,
-    sabedoria : 10,
-    carisma : 10,
-    dano : 0,
-    ataque : 0,
-    defesa : 0,
-    vida : 0,
-    iniciativa : 0,
-    resistencia : 0,
-    reflexo : 0,
-    fortitude : 0,
-    vontade : 0,
-  };
-  
-  private personas: Persona[] = [{
-    id: 1,
-    name : 'Ninja',
-    np : 3,
-    forca : 12, 
-    destreza : 18,
-    constituicao : 14,
-    inteligencia : 12,
-    sabedoria : 14,
-    carisma : 10,
-    dano : 2,
-    ataque : 8,
-    defesa : 12,
-    vida : 0,
-    iniciativa : 1,
-    resistencia : 0,
-    reflexo : 2,
-    fortitude : 0,
-    vontade : 0,
-  },
-  {
-    id: 2,
-    name : 'Warrior',
-    np : 3,
-    forca : 18, 
-    destreza : 14,
-    constituicao : 18,
-    inteligencia : 10,
-    sabedoria : 12,
-    carisma : 12,
-    dano : 0,
-    ataque : 8,
-    defesa : 8,
-    vida : 0,
-    iniciativa : 0,
-    resistencia : 1,
-    reflexo : 0,
-    fortitude : 1,
-    vontade : 3,
-  }]; 
+  private baseUrl: string;
 
   constructor(  public http: HttpClient,
+                private authProvider: AuthProvider,
                 private helperProvider: HelperProvider, 
                 private keysProvider: KeysProvider ) {
     console.log('PersonaProvider');
+    this.baseUrl = this.helperProvider.baseUrl;
   }
 
-  getNewPersona() {
-    return this.newPersona;
+  getNewPersona(): Persona {
+    return new NewPersona();
   }
 
-  savePersona(persona: Persona) {
+  savePersona(persona: Persona): Observable<any> {
+    let token = this.authProvider.authUser.getValue();
+    let headers = new HttpHeaders({
+      'Accept' : 'application/json',
+      'Authorization' : `${token.token_type} ${token.access_token}`,
+    });
     if(persona.id){
-      this.personas = this.personas.map((p) => {
-        if (p.id == persona.id){
-          return persona;
-        } else {
-          return p
-        }
-      });
+      return this.http.put(`${this.baseUrl}/api/personas/${persona.id}`, persona,{headers: headers});
     }else{
-      let id: number = this.personas.slice(-1)[0].id;
-      persona.id = ++id;
-      console.log(persona);
-      this.personas.push(persona); 
-      console.log(this.personas);
+      return this.http.post(`${this.baseUrl}/api/personas`, persona, {headers: headers});
     }
-    return this.http.put(`${this.baseUrl}/put`, persona);
   }
 
-  syncAccount() {
-    return this.http.post(`${this.baseUrl}/post`, JSON.stringify(this.personas));
+  deletePersona(id: number): Observable<any> {
+    let token = this.authProvider.authUser.getValue();
+    let headers = new HttpHeaders({
+      'Accept' : 'application/json',
+      'Authorization' : `${token.token_type} ${token.access_token}`,
+    });
+    return this.http.delete(`${this.baseUrl}/api/personas/${id}`, {headers: headers});
+  }
+
+  syncPersona(token: Token): Observable<httpSuccessResponse> {
+    let headers = new HttpHeaders({
+      'Accept' : 'application/json',
+      'Authorization' : `${token.token_type} ${token.access_token}`,
+    });
+    console.log(headers);
+    return this.http.get<httpSuccessResponse>(`${this.baseUrl}/api/personas`, {headers: headers});
   }
 
   getTotalPoints(persona: Persona): TotalPoints {

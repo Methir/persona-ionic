@@ -1,6 +1,6 @@
 export interface Persona {
     id?: number,
-    name: string,
+    nome: string,
     np: number,
 
     forca: number,
