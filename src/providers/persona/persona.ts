@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { Persona, httpSuccessResponse, TotalPoints, Token} from '../../interfaces';
+import { Persona, HttpSuccessResponse, TotalPoints, Token} from '../../interfaces';
 import { KeysProvider, HelperProvider, AuthProvider } from './../';
 import { NewPersona } from './new-persona';
 
@@ -23,35 +23,35 @@ export class PersonaProvider {
     return new NewPersona();
   }
 
-  savePersona(persona: Persona): Observable<any> {
+  savePersona(persona: Persona): Observable<HttpSuccessResponse> {
     let token = this.authProvider.authUser.getValue();
     let headers = new HttpHeaders({
       'Accept' : 'application/json',
       'Authorization' : `${token.token_type} ${token.access_token}`,
     });
     if(persona.id){
-      return this.http.put(`${this.baseUrl}/api/personas/${persona.id}`, persona,{headers: headers});
+      return this.http.put<HttpSuccessResponse>(`${this.baseUrl}/api/personas/${persona.id}`, persona,{headers: headers});
     }else{
-      return this.http.post(`${this.baseUrl}/api/personas`, persona, {headers: headers});
+      return this.http.post<HttpSuccessResponse>(`${this.baseUrl}/api/personas`, persona, {headers: headers});
     }
   }
 
-  deletePersona(id: number): Observable<any> {
+  deletePersona(id: number): Observable<HttpSuccessResponse> {
     let token = this.authProvider.authUser.getValue();
     let headers = new HttpHeaders({
       'Accept' : 'application/json',
       'Authorization' : `${token.token_type} ${token.access_token}`,
     });
-    return this.http.delete(`${this.baseUrl}/api/personas/${id}`, {headers: headers});
+    return this.http.delete<HttpSuccessResponse>(`${this.baseUrl}/api/personas/${id}`, {headers: headers});
   }
 
-  getAllPersonas(): Observable<httpSuccessResponse> {
+  getAllPersonas(): Observable<HttpSuccessResponse> {
     let token: Token = this.authProvider.authUser.getValue();
     let headers = new HttpHeaders({
       'Accept' : 'application/json',
       'Authorization' : `${token.token_type} ${token.access_token}`,
     });
-    return this.http.get<httpSuccessResponse>(`${this.baseUrl}/api/personas`, {headers: headers});
+    return this.http.get<HttpSuccessResponse>(`${this.baseUrl}/api/personas`, {headers: headers});
   }
 
   getTotalPoints(persona: Persona): TotalPoints {
