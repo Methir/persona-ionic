@@ -1,10 +1,9 @@
-import { AuthProvider } from './../auth/auth';
-import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { Persona, httpSuccessResponse, TotalPoints, Token} from '../../interfaces';
-import { KeysProvider, HelperProvider } from './../';
+import { KeysProvider, HelperProvider, AuthProvider } from './../';
 import { NewPersona } from './new-persona';
 
 @Injectable()
@@ -46,12 +45,12 @@ export class PersonaProvider {
     return this.http.delete(`${this.baseUrl}/api/personas/${id}`, {headers: headers});
   }
 
-  syncPersona(token: Token): Observable<httpSuccessResponse> {
+  getAllPersonas(): Observable<httpSuccessResponse> {
+    let token: Token = this.authProvider.authUser.getValue();
     let headers = new HttpHeaders({
       'Accept' : 'application/json',
       'Authorization' : `${token.token_type} ${token.access_token}`,
     });
-    console.log(headers);
     return this.http.get<httpSuccessResponse>(`${this.baseUrl}/api/personas`, {headers: headers});
   }
 

@@ -1,5 +1,7 @@
+import { Storage } from '@ionic/storage';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { Token } from './../../interfaces';
@@ -17,6 +19,7 @@ export class LoginPage {
   constructor(  public navCtrl: NavController, 
                 public navParams: NavParams, 
                 private formBuilder: FormBuilder,
+                private storage: Storage,
                 private helperProvider: HelperProvider,
                 private authProvider: AuthProvider ) { }
 
@@ -30,7 +33,7 @@ export class LoginPage {
       password: [ null, [
         Validators.required,
         Validators.minLength(4),
-        Validators.maxLength(8),
+        Validators.maxLength(12),
       ] ],
     });
   }
@@ -51,11 +54,17 @@ export class LoginPage {
     .subscribe(
       (token: Token) => {
         console.log(token);
-          this.authProvider.authUser.next(token);
-          this.navCtrl.pop();
+          this.storage.set('persona_token', token).then(() => {
+            this.authProvider.authUser.next(token);
+            this.navCtrl.pop();
+          }).catch(() => {
+            this.authProvider.authUser.next(token);
+            this.navCtrl.pop();
+          });
       },
-      (erro) => {
-        console.log(erro);
+      (error: HttpErrorResponse) => {
+        console.log(error);
+        console.log(error.error.message);
         this.helperProvider.persistAlert('Erro ao tentar acessar o sistema. Veja se errou sua senha, se não deu muito ruim. xD')
     });
   }

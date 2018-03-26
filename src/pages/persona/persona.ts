@@ -1,8 +1,9 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { Key, Persona, TotalPoints } from './../../interfaces';
+import { Key, Persona, TotalPoints, HttpSuccessResponse } from './../../interfaces';
 import { PersonaProvider, KeysProvider, HelperProvider, AuthProvider } from '../../providers';
 
 @IonicPage()
@@ -27,6 +28,7 @@ export class PersonaPage {
               private helperProvider: HelperProvider,
               private keysProvider: KeysProvider,
               private personaProvider: PersonaProvider ) {
+    console.log('pagina persona carregada...');
     this.abilityKeys = this.keysProvider.abilityKeys;
     this.combatKeys = this.keysProvider.combatKeys;
     this.savingKeys = this.keysProvider.savingKeys;
@@ -44,8 +46,8 @@ export class PersonaPage {
       id : [this.persona.id],
       nome : [ this.persona.nome,
         [ Validators.required,
-          Validators.min(4),
-          Validators.max(20)] ],
+          Validators.min(2),
+          Validators.max(25)] ],
       np : [this.persona.np, Validators.required],
       forca : [ this.persona.forca, Validators.required],
       destreza : [this.persona.destreza, Validators.required],
@@ -73,20 +75,19 @@ export class PersonaPage {
 
   savePersona() {
     if (this.forms.invalid) {
-      this.helperProvider.persistAlert('Formulário invalido! Tente novamente ßou refaça.');
+      this.helperProvider.persistAlert('Formulário invalido! Verifique se o nome tem entre 2 e 25 caracteres.');
     } else {
       this.personaProvider.savePersona(this.forms.value)
       .subscribe(
-        (data) => {
-          console.log(data);
+        (res: HttpSuccessResponse) => {
+          console.log(res);
           this.helperProvider.timeAlert('Salvo com sucesso!');
           this.authProvider.authUser.next(this.authProvider.authUser.getValue());
           this.navCtrl.pop();
         },
-        (erro) => {
-          console.log(erro);
-          console.log(erro.error.message);
-          //this.authProvider.authUser.next(null);
+        (error: HttpErrorResponse) => {
+          console.log(error);
+          console.log(error.error.message);
           this.helperProvider.persistAlert('Erro ao tentar salvar! Algo de errado não está certo.');
       });
     }
@@ -96,16 +97,15 @@ export class PersonaPage {
     if (this.persona.id) {
       this.personaProvider.deletePersona(this.persona.id)
       .subscribe(
-        (data) => {
-          console.log(data);
-          this.helperProvider.timeAlert('Salvo com sucesso!');
+        (res: HttpSuccessResponse) => {
+          console.log(res);
+          this.helperProvider.timeAlert('Deletado com sucesso!');
           this.authProvider.authUser.next(this.authProvider.authUser.getValue());
           this.navCtrl.pop();
         },
-        (erro) => {
-          console.log(erro);
-          console.log(erro.error.message);
-          //this.authProvider.authUser.next(null);
+        (error: HttpErrorResponse) => {
+          console.log(error);
+          console.log(error.error.message);
           this.helperProvider.persistAlert('Erro ao tentar deletar! Algo de errado não está certo.');
       });
     }else{

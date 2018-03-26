@@ -5,6 +5,10 @@ import { Key } from './../../interfaces/key';
 @Injectable()
 export class KeysProvider {
 
+  constructor() {
+    console.log('KeysProvider')
+  }
+
   get abilityKeys(): Key[] {
     return [
       { label : "Força", name : "forca" },
