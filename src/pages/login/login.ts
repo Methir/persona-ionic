@@ -2,7 +2,7 @@ import { Storage } from '@ionic/storage';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 
 import { Token } from './../../interfaces';
 import { HelperProvider, AuthProvider } from './../../providers';
@@ -17,7 +17,8 @@ export class LoginPage {
   forms: FormGroup;
 
   constructor(  public navCtrl: NavController, 
-                public navParams: NavParams, 
+                public navParams: NavParams,
+                public menuCtrl: MenuController,  
                 private formBuilder: FormBuilder,
                 private storage: Storage,
                 private helperProvider: HelperProvider,
@@ -38,35 +39,45 @@ export class LoginPage {
     });
   }
 
+  ionViewWillEnter() {
+    this.menuCtrl.enable(false);
+  }
+
+  ionViewWillLeave() {
+    this.menuCtrl.enable(true);
+  }
+
   onSubmit() {
-    let loading = this.helperProvider.createLoad();
-    loading.present();
     if (this.forms.invalid) {
       this.helperProvider.persistAlert('O email e senha são campos necessários. Verifique se foram preenchidos corretamente.');
     } else {
       this.authenticate(this.forms.value['username'], this.forms.value['password']);
     }
-    loading.dismiss();
   }
   
   authenticate(username, password) {
+    let loading = this.helperProvider.createLoad();
+    loading.present();
     this.authProvider.authenticate(username, password)
     .subscribe(
       (token: Token) => {
         console.log(token);
-          this.storage.set('persona_token', token).then(() => {
-            this.authProvider.authUser.next(token);
-            this.navCtrl.pop();
-          }).catch(() => {
-            this.authProvider.authUser.next(token);
-            this.navCtrl.pop();
-          });
+        this.storage.set('persona_token', token).then(() => {
+          this.authProvider.authUser.next(token);
+          this.navCtrl.pop();
+        }).catch(() => {
+          this.authProvider.authUser.next(token);
+          this.navCtrl.pop();
+        });
+        loading.dismiss();
       },
       (error: HttpErrorResponse) => {
         console.log(error);
         console.log(error.error.message);
-        this.helperProvider.persistAlert('Erro ao tentar acessar o sistema. Veja se errou sua senha, se não deu muito ruim. xD')
-    });
+        loading.dismiss();
+        this.helperProvider.persistAlert('Erro ao tentar acessar o sistema. Veja se errou sua senha, se não deu muito ruim. xD');
+      }
+    );
   }
 
   

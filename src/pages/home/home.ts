@@ -22,31 +22,35 @@ export class HomePage {
                 public navParams: NavParams,
                 private authProvider: AuthProvider,
                 private helperProvider: HelperProvider,
-                private personaProvider: PersonaProvider ) { }
+                private personaProvider: PersonaProvider ) {
+    
+    this.newPersona = this.personaProvider.getNewPersona();
+  }
 
   ionViewDidLoad() {
     console.log('pagina home carregada...');
-    this.newPersona = this.personaProvider.getNewPersona();
     this.authProvider.seeAuthUser.subscribe( 
       (token: Token) => {
-        let loading = this.helperProvider.createLoad();
-        loading.present();
         if(!token){
           this.navCtrl.push(LoginPage);
         }else{
+          let loading = this.helperProvider.createLoad();
+          loading.present();
           this.personaProvider.getAllPersonas().subscribe( 
             (res: HttpSuccessResponse) => {
               console.log('sincronizado com sucesso');
               if(!res.errors){
                 this.personas = res.data;
               }
+              loading.dismiss();
             },
             (error: HttpErrorResponse) => {
               console.log(error);
-              console.log(error.error.message);             
-          });
+              console.log(error.error.message);
+              loading.dismiss();             
+            }
+          );
         }
-        loading.dismiss();
     });
   }
 

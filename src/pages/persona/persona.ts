@@ -77,37 +77,46 @@ export class PersonaPage {
     if (this.forms.invalid) {
       this.helperProvider.persistAlert('Formulário invalido! Verifique se o nome tem entre 2 e 25 caracteres.');
     } else {
+      let loading = this.helperProvider.createLoad();
+      loading.present();
       this.personaProvider.savePersona(this.forms.value)
       .subscribe(
         (res: HttpSuccessResponse) => {
           console.log(res);
-          this.helperProvider.timeAlert('Salvo com sucesso!');
           this.authProvider.authUser.next(this.authProvider.authUser.getValue());
-          this.navCtrl.pop();
+          loading.dismiss();
+          this.helperProvider.timeAlert('Salvo com sucesso!');
         },
         (error: HttpErrorResponse) => {
           console.log(error);
           console.log(error.error.message);
+          loading.dismiss();
           this.helperProvider.persistAlert('Erro ao tentar salvar! Algo de errado não está certo.');
-      });
+        }
+      );
     }
   }
 
   deletePersona() {
     if (this.persona.id) {
+      let loading = this.helperProvider.createLoad();
+      loading.present();
       this.personaProvider.deletePersona(this.persona.id)
       .subscribe(
         (res: HttpSuccessResponse) => {
           console.log(res);
-          this.helperProvider.timeAlert('Deletado com sucesso!');
           this.authProvider.authUser.next(this.authProvider.authUser.getValue());
           this.navCtrl.pop();
+          loading.dismiss();
+          this.helperProvider.timeAlert('Deletado com sucesso!');
         },
         (error: HttpErrorResponse) => {
           console.log(error);
           console.log(error.error.message);
+          loading.dismiss();
           this.helperProvider.persistAlert('Erro ao tentar deletar! Algo de errado não está certo.');
-      });
+        }
+      );
     }else{
       this.navCtrl.pop();
     }

@@ -1,8 +1,6 @@
 import { Storage } from '@ionic/storage';
 import { Component, ViewChild } from '@angular/core';
-import { Platform, Nav } from 'ionic-angular';
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
+import { Nav } from 'ionic-angular';
 import { BehaviorSubject } from 'rxjs';
 
 import { Token } from './../interfaces/token';
@@ -14,14 +12,12 @@ import { HomePage } from './../pages/home/home';
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-
   rootPage: any;
-  
   pages: Array<{title: string, component: any}>;
 
-  constructor(  public platform: Platform, 
-                public statusBar: StatusBar, 
-                public splashScreen: SplashScreen,
+  constructor(  //public platform: Platform, 
+                //public statusBar: StatusBar, 
+                //public splashScreen: SplashScreen,
                 private storage: Storage,
                 private authProvider: AuthProvider ) {
     console.log('Navegador principal carregado...');
@@ -38,15 +34,18 @@ export class MyApp {
         this.authProvider.seeAuthUser = this.authProvider.authUser.asObservable();
         this.rootPage = HomePage;
       });
-    this.initializeApp();
+    //this.initializeApp();
   }
 
-  initializeApp() {
-    this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-    });
+  ionViewDidEnter() {
   }
+
+  //initializeApp() {
+  //  this.platform.ready().then(() => {
+  //    this.statusBar.styleDefault();
+  //    this.splashScreen.hide();
+  //  });
+  //}
 
   openPage(page) {
     this.nav.setRoot(page.component);
