@@ -34,11 +34,8 @@ export class PersonaPage {
     this.savingKeys = this.keysProvider.savingKeys;
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad PersonaPage');
-  }
-
   ngOnInit() {
+    console.log('pagina persona carregada...');
     this.persona = this.navParams.data;
     this.totalPoints = this.personaProvider.getTotalPoints(this.persona);
     this.bonusPoints = this.personaProvider.getBonusPoints(this.persona);
@@ -82,14 +79,11 @@ export class PersonaPage {
       this.personaProvider.savePersona(this.forms.value)
       .subscribe(
         (res: HttpSuccessResponse) => {
-          console.log(res);
           this.authProvider.authUser.next(this.authProvider.authUser.getValue());
           loading.dismiss();
           this.helperProvider.timeAlert('Salvo com sucesso!');
         },
         (error: HttpErrorResponse) => {
-          console.log(error);
-          console.log(error.error.message);
           loading.dismiss();
           this.helperProvider.persistAlert('Erro ao tentar salvar! Algo de errado não está certo.');
         }
@@ -104,21 +98,18 @@ export class PersonaPage {
       this.personaProvider.deletePersona(this.persona.id)
       .subscribe(
         (res: HttpSuccessResponse) => {
-          console.log(res);
           this.authProvider.authUser.next(this.authProvider.authUser.getValue());
-          this.navCtrl.pop();
+          this.navCtrl.popToRoot();
           loading.dismiss();
           this.helperProvider.timeAlert('Deletado com sucesso!');
         },
         (error: HttpErrorResponse) => {
-          console.log(error);
-          console.log(error.error.message);
           loading.dismiss();
           this.helperProvider.persistAlert('Erro ao tentar deletar! Algo de errado não está certo.');
         }
       );
     }else{
-      this.navCtrl.pop();
+      this.navCtrl.popToRoot();
     }
   }
   

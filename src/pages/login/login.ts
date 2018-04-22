@@ -61,19 +61,16 @@ export class LoginPage {
     this.authProvider.authenticate(username, password)
     .subscribe(
       (token: Token) => {
-        console.log(token);
         this.storage.set('persona_token', token).then(() => {
           this.authProvider.authUser.next(token);
-          this.navCtrl.pop();
+          this.navCtrl.popToRoot();
         }).catch(() => {
           this.authProvider.authUser.next(token);
-          this.navCtrl.pop();
+          this.navCtrl.popToRoot();
         });
         loading.dismiss();
       },
       (error: HttpErrorResponse) => {
-        console.log(error);
-        console.log(error.error.message);
         loading.dismiss();
         this.helperProvider.persistAlert('Erro ao tentar acessar o sistema. Veja se errou sua senha, se não deu muito ruim. xD');
       }

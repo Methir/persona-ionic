@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -34,11 +34,7 @@ export class AuthProvider {
   }
 
   getUser(token: Token): Observable<any> {
-    let headers = new HttpHeaders({
-      'Accept' : 'application/json',
-      'Authorization' : `${token.token_type} ${token.access_token}`,
-    });
-    return this.http.get(`${this.baseUrl}/api/user`, {headers: headers});
+    return this.http.get(`${this.baseUrl}/api/user`);
   }
 
 }

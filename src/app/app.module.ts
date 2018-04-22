@@ -1,6 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
 
@@ -10,6 +10,8 @@ import { AuthProvider, HelperProvider, KeysProvider, PersonaProvider } from '../
 import { PersonaPageModule } from './../pages/persona/persona.module';
 import { HomePageModule } from '../pages/home/home.module';
 import { LoginPageModule } from '../pages/login/login.module';
+import { AuthInterceptor } from '../interceptors/auth.interceptor';
+import { TokenInterceptor } from '../interceptors/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { LoginPageModule } from '../pages/login/login.module';
   providers: [
     //StatusBar,
     //SplashScreen,
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     KeysProvider,
     PersonaProvider,

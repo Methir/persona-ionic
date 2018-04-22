@@ -27,12 +27,14 @@ export class HomePage {
     this.newPersona = this.personaProvider.getNewPersona();
   }
 
-  ionViewDidLoad() {
+  ngOnInit() {
     console.log('pagina home carregada...');
     this.authProvider.seeAuthUser.subscribe( 
       (token: Token) => {
         if(!token){
-          this.navCtrl.push(LoginPage);
+          if(!(this.navCtrl.getActive().instance instanceof LoginPage)) {
+            this.navCtrl.push(LoginPage);
+          }
         }else{
           let loading = this.helperProvider.createLoad();
           loading.present();
@@ -45,8 +47,6 @@ export class HomePage {
               loading.dismiss();
             },
             (error: HttpErrorResponse) => {
-              console.log(error);
-              console.log(error.error.message);
               loading.dismiss();             
             }
           );

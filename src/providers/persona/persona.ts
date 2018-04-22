@@ -1,9 +1,9 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { Persona, HttpSuccessResponse, TotalPoints, Token} from '../../interfaces';
-import { KeysProvider, HelperProvider, AuthProvider } from './../';
+import { Persona, HttpSuccessResponse, TotalPoints} from '../../interfaces';
+import { KeysProvider, HelperProvider } from './../';
 import { NewPersona } from './new-persona';
 
 @Injectable()
@@ -12,7 +12,6 @@ export class PersonaProvider {
   private baseUrl: string;
 
   constructor(  public http: HttpClient,
-                private authProvider: AuthProvider,
                 private helperProvider: HelperProvider, 
                 private keysProvider: KeysProvider ) {
     console.log('PersonaProvider');
@@ -24,34 +23,19 @@ export class PersonaProvider {
   }
 
   savePersona(persona: Persona): Observable<HttpSuccessResponse> {
-    let token = this.authProvider.authUser.getValue();
-    let headers = new HttpHeaders({
-      'Accept' : 'application/json',
-      'Authorization' : `${token.token_type} ${token.access_token}`,
-    });
     if(persona.id){
-      return this.http.put<HttpSuccessResponse>(`${this.baseUrl}/api/personas/${persona.id}`, persona,{headers: headers});
+      return this.http.put<HttpSuccessResponse>(`${this.baseUrl}/api/personas/${persona.id}`, persona);
     }else{
-      return this.http.post<HttpSuccessResponse>(`${this.baseUrl}/api/personas`, persona, {headers: headers});
+      return this.http.post<HttpSuccessResponse>(`${this.baseUrl}/api/personas`, persona);
     }
   }
 
   deletePersona(id: number): Observable<HttpSuccessResponse> {
-    let token = this.authProvider.authUser.getValue();
-    let headers = new HttpHeaders({
-      'Accept' : 'application/json',
-      'Authorization' : `${token.token_type} ${token.access_token}`,
-    });
-    return this.http.delete<HttpSuccessResponse>(`${this.baseUrl}/api/personas/${id}`, {headers: headers});
+    return this.http.delete<HttpSuccessResponse>(`${this.baseUrl}/api/personas/${id}`);
   }
 
   getAllPersonas(): Observable<HttpSuccessResponse> {
-    let token: Token = this.authProvider.authUser.getValue();
-    let headers = new HttpHeaders({
-      'Accept' : 'application/json',
-      'Authorization' : `${token.token_type} ${token.access_token}`,
-    });
-    return this.http.get<HttpSuccessResponse>(`${this.baseUrl}/api/personas`, {headers: headers});
+    return this.http.get<HttpSuccessResponse>(`${this.baseUrl}/api/personas`);
   }
 
   getTotalPoints(persona: Persona): TotalPoints {

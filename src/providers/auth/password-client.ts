@@ -1,7 +1,7 @@
 export class PasswordClient {
     grant_type: string = "password";
     client_id: number = 1;
-    client_secret: string = "p8dfUPsJbqPDSIBNvAzQIo8dINc4144599kvjCZ6";
+    client_secret: string = "qbFteQEPQCjFJWfAA1DljbcywP5ZZGKOeIIHDdzk";
     username: string;
     password: string;
     scope: string = "";
