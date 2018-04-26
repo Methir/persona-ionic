@@ -1,0 +1,19 @@
+<ion-list>
+  <ion-fab top right>
+    <button ion-fab mini color="primary"
+            (click)="presentAttrbutePopover($event)"        
+    >
+      <ion-icon name="ios-more"></ion-icon>
+    </button>
+  </ion-fab>
+  <ion-row>
+    <ion-col  col-12 col-ms-6 col-md-6 col-lg-6 col-xl-6
+              *ngFor="let item of getItems()"
+    >
+      <attribute-persona  [label]="item.name"
+                          [max]="item.max"
+      >
+      </attribute-persona>
+    </ion-col>
+  </ion-row>  
+</ion-list>

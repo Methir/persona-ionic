@@ -12,6 +12,7 @@ import { HomePageModule } from '../pages/home/home.module';
 import { LoginPageModule } from '../pages/login/login.module';
 import { AuthInterceptor } from '../interceptors/auth.interceptor';
 import { TokenInterceptor } from '../interceptors/token.interceptor';
+import { AttributePopoverComponent } from '../components/persona/attribute/attribute-popover/attribute-popover';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { TokenInterceptor } from '../interceptors/token.interceptor';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    AttributePopoverComponent
   ],
   providers: [
     //StatusBar,

@@ -15,6 +15,8 @@ export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
 export class AttributePersonaComponent implements ControlValueAccessor {
 
   @Input() label: string;
+  @Input() max: number = 0;
+  @Input() min: number = 0;
   private onChange;
   public value: number;
 
@@ -22,17 +24,24 @@ export class AttributePersonaComponent implements ControlValueAccessor {
     console.log('Hello AttributePersonaComponent Component');
   }
 
-  increment(points: number): void {
-    this.value++;
-    this.onChange(this.value);
+  increment(): void {
+    if (!this.max || this.value < this.max) {
+      this.value++;
+      this.onChange(this.value);
+    } else if (this.value > this.max) {
+      this.value = this.max;
+      this.onChange(this.value);
+    }
   }
 
-  decrement(points: number): void {
-    this.value--;
-    if (this.value < 0) {
-      this.value = 0;
+  decrement(): void {
+    if (this.value > this.min) {
+      this.value--;
+      this.onChange(this.value);
+    } else if(this.value < this.min) {
+      this.value = this.min;
+      this.onChange(this.value);
     }
-    this.onChange(this.value);
   }
 
   writeValue(value: number): void {

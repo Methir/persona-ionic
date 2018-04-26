@@ -59,7 +59,7 @@
             <ion-row>
               <ion-col  col-12 col-ms-6 col-md-6 col-lg-6 col-xl-6 
                         *ngFor="let combatKey of combatKeys">
-                <attribute-persona  [label]="combatKey.label" 
+                <attribute-persona  [label]="combatKey.label"
                                     formControlName="{{combatKey.name}}">
                   ({{bonusPoints[combatKey.name]|truncateNumber}})
                 </attribute-persona>
@@ -80,6 +80,17 @@
                 </attribute-persona>
               </ion-col>
             </ion-row>
+          </card-persona>
+        </ion-col>
+      </ion-row>
+      <!-- Close Saving Part -->
+      <!-- Open effect Part -->
+      <ion-row>
+        <ion-col col-12 col-ms-12 col-md-12 col-lg-6 col-xl-6>
+          <card-persona label="Feitos">
+            <dinamic-list-persona>
+              
+            </dinamic-list-persona>
           </card-persona>
         </ion-col>
       </ion-row>
