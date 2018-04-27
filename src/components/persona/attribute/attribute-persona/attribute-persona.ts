@@ -35,6 +35,7 @@ export class AttributePersonaComponent implements ControlValueAccessor {
   }
 
   decrement(): void {
+    this.min = Number.isInteger(this.min)?this.min:0;
     if (this.value > this.min) {
       this.value--;
       this.onChange(this.value);

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Key } from './../../interfaces/key';
+import { newEffect } from './new-effect-keys';
 
 @Injectable()
 export class KeysProvider {
@@ -37,6 +38,10 @@ export class KeysProvider {
       { label : "Fortitude", name : "fortitude"},
       { label : "Vontade", name : "vontade"},
     ];
+  }
+
+  get effectItems(): any[] {
+    return (new newEffect).items; 
   }
 
 }

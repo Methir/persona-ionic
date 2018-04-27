@@ -20,6 +20,7 @@ export class PersonaPage {
   abilityKeys: Key[];
   combatKeys: Key[];
   savingKeys: Key[];
+  effectItems: any[];
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
@@ -28,14 +29,14 @@ export class PersonaPage {
               private helperProvider: HelperProvider,
               private keysProvider: KeysProvider,
               private personaProvider: PersonaProvider ) {
-    console.log('pagina persona carregada...');
     this.abilityKeys = this.keysProvider.abilityKeys;
     this.combatKeys = this.keysProvider.combatKeys;
     this.savingKeys = this.keysProvider.savingKeys;
+    this.effectItems = this.keysProvider.effectItems;
+    console.log('pagina persona carregada...');
   }
 
   ngOnInit() {
-    console.log('pagina persona carregada...');
     this.persona = this.navParams.data;
     this.totalPoints = this.personaProvider.getTotalPoints(this.persona);
     this.bonusPoints = this.personaProvider.getBonusPoints(this.persona);

@@ -10,8 +10,10 @@
     <ion-col  col-12 col-ms-6 col-md-6 col-lg-6 col-xl-6
               *ngFor="let item of getItems()"
     >
-      <attribute-persona  [label]="item.name"
+      <attribute-persona  [label]="item.label"
+                          [(ngModel)]="item.points"
                           [max]="item.max"
+                          [min]="item.min"
       >
       </attribute-persona>
     </ion-col>

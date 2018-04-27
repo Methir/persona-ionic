@@ -31,7 +31,7 @@ export class AttributePopoverComponent {
     // if the value is an empty string don't filter the items
     if (val && val.trim() != '') {
       this.items = this.items.filter((item) => {
-        return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        return (item.label.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
     }
   }
