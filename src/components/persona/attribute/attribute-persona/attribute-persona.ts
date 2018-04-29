@@ -49,7 +49,7 @@ export class AttributePersonaComponent implements ControlValueAccessor {
     this.min = Number.isInteger(this.min) ? this.min : 0;
     if (value < this.min) {
       this.value = this.min
-    } else if (value > this.max) {
+    } else if (this.max && value > this.max) {
       this.value = this.max;
     } else {
       this.value = value;

@@ -1,10 +1,8 @@
 <ion-card>
-  <ion-list>
-    <ion-list-header (click)="content.hidden = !content.hidden" text-center>
+    <ion-card-header (click)="content.hidden = !content.hidden" text-center>
       <a>{{ label }}<span *ngIf="points || points == 0">({{ points }}pp)</span></a>
-    </ion-list-header>
+    </ion-card-header>
     <div #content>
       <ng-content></ng-content>
     </div>
-  </ion-list>  
 </ion-card>

@@ -1,17 +1,17 @@
-<ion-item>
-  <ion-label>
-    {{label}}
-    <ng-content></ng-content>
-    <ion-badge *ngIf="value || value == 0">{{ value }}pp</ion-badge>
-  </ion-label>
-  <button ion-fab color="danger" 
-          item-end mini
-          (click)="decrement()">
-    <ion-icon name="remove"></ion-icon>
-  </button>
-  <button ion-fab color="secondary" 
-          item-end mini
-          (click)="increment()">
-    <ion-icon name="add"></ion-icon>
-  </button>
-</ion-item>
+  <ion-item>
+    <ion-label>
+      {{label}}
+      <ng-content></ng-content>
+      <ion-badge *ngIf="value || value == 0">{{ value }}pp</ion-badge>
+    </ion-label>
+    <button ion-fab color="danger" 
+            item-end mini
+            (click)="decrement()">
+      <ion-icon name="remove"></ion-icon>
+    </button>
+    <button ion-fab color="secondary" 
+            item-end mini
+            (click)="increment()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-item>

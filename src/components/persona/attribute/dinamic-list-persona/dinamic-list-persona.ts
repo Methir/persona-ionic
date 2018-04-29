@@ -19,39 +19,47 @@ export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
 export class DinamicListPersonaComponent implements ControlValueAccessor {
 
   @Input() itemsList: Item[];
+  @Input() bonus: any[];
   private onChange;
 
   constructor(public popoverCtrl: PopoverController) {
     console.log('Hello DinamicListPersonaComponent Component');
   }
 
-  getItems() {
+  change() {
+    this.onChange(this.items);
+  }
+
+  get items() {
     let items = this.itemsList.filter((item) => {
       return item.checked;
     });
-
-    this.onChange(items);
     return items;
   }
 
   presentAttrbutePopover(event) {
-    let popover = this.popoverCtrl.create(AttributePopoverComponent, this.itemsList);
+    let popover = this.popoverCtrl.create(
+      AttributePopoverComponent, 
+      {itemsList: this.itemsList, callback: () => this.change() }
+    );
     popover.present({
       ev: event
     });
   }
 
   writeValue(items: Item[]): void {
-    items.forEach((item) => {
-      let index = this.itemsList.findIndex((itemList) => {
-        return itemList.id == item.id;
+    if (items) { 
+      items.forEach((item) => {
+        let index = this.itemsList.findIndex((itemList) => {
+          return itemList.id == item.id;
+        });
+        
+        if (index >= 0) {
+          this.itemsList[index].checked = true;
+          this.itemsList[index].points = item.points;
+        }
       });
-      
-      if (index >= 0) {
-        this.itemsList[index].checked = true;
-        this.itemsList[index].points = item.points;
-      }
-    });
+    } 
   }
 
   registerOnChange(fn: any): void {

@@ -9,14 +9,20 @@ import { Item } from '../../../../interfaces';
 })
 export class AttributePopoverComponent {
 
+  onChange: any;
   items: Item[];
 
   constructor(public navParams: NavParams) {
     this.initializeItems();
+    this.onChange = this.navParams.data['callback'];
+  }
+
+  change() {
+    this.navParams.data['callback']();
   }
 
   initializeItems() {
-    this.items = this.navParams.data;
+    this.items = this.navParams.data['itemsList'];
   }
 
   getItems(event: any) {

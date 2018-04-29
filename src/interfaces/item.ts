@@ -5,5 +5,5 @@ export interface Item{
     checked?: boolean,
     max?: number,
     min?: number,
-    abilityKey?: string,
+    bonusKey?: string,
 }

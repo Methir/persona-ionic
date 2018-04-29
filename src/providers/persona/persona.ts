@@ -39,23 +39,28 @@ export class PersonaProvider {
   }
 
   getTotalPoints(persona: Persona): TotalPoints {
-    //let total: TotalPoints = {ability: 0, combat: 0, saving: 0, effect: 0, skill: 0, all: 0};
-    let total: any = {ability: 0, combat: 0, saving: 0, all: 0};
+    let total: TotalPoints = {ability: 0, combat: 0, saving: 0, effect: 0, skill: 0, all: 0};
 
     total.ability = this.helperProvider.sumKeys(persona, this.keysProvider.abilityKeys);
     total.ability -= 60;
     total.combat = this.helperProvider.sumKeys(persona, this.keysProvider.combatKeys);
     total.saving = this.helperProvider.sumKeys(persona, this.keysProvider.savingKeys);
-    //total.effect = persona.feitos.reduce((total, feito) => total + feito.points, 0);
-    //total.skill = Math.floor((persona.pericias.reduce((total, pericia) => total + pericia.points, 0))/4);
+    total.effect = persona.feitos.reduce((total, feito) => total + feito.points, 0);
+    total.skill = Math.ceil((persona.pericias.reduce((total, pericia) => total + pericia.points, 0))/4);
 
-    total.all = total.ability + total.combat + total.saving; // + total.effect + total.skill;
+    total.all = total.ability + total.combat + total.saving + total.effect + total.skill;
     return total;
   }
 
   getBonusPoints(persona: Persona) {
-    let bonus = { dano:0, ataque:0, defesa:0, vida:0, iniciativa:0, 
-                  resistencia:0, reflexo:0, fortitude:0, vontade:0 };
+    let bonus = new NewPersona();
+
+    bonus.forca = Math.floor((persona.forca-10)/2);
+    bonus.destreza = Math.floor((persona.destreza-10)/2);
+    bonus.constituicao = Math.floor((persona.constituicao-10)/2);
+    bonus.inteligencia = Math.floor((persona.inteligencia-10)/2);
+    bonus.sabedoria = Math.floor((persona.sabedoria-10)/2);
+    bonus.carisma = Math.floor((persona.carisma-10)/2);
 
     bonus.dano = (persona.dano+(persona.forca-10))/2;
     bonus.ataque = persona.ataque/2;

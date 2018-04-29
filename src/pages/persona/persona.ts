@@ -64,13 +64,13 @@ export class PersonaPage {
       reflexo : [this.persona.reflexo, Validators.required],
       fortitude : [this.persona.fortitude, Validators.required],
       vontade : [this.persona.vontade, Validators.required],
-      pericias : [this.persona.pericias],
       feitos : [this.persona.feitos],
+      pericias : [this.persona.pericias],
     });
     this.forms.valueChanges.subscribe(
       (persona) => {
-        this.totalPoints = this.personaProvider.getTotalPoints(persona);
-        this.bonusPoints = this.personaProvider.getBonusPoints(persona);
+          this.totalPoints = this.personaProvider.getTotalPoints(persona);
+          this.bonusPoints = this.personaProvider.getBonusPoints(persona);
       } 
     );
   }
