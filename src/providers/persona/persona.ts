@@ -39,13 +39,17 @@ export class PersonaProvider {
   }
 
   getTotalPoints(persona: Persona): TotalPoints {
-    let total: TotalPoints = {ability:0, combat:0, saving:0, all:0};
-    
+    //let total: TotalPoints = {ability: 0, combat: 0, saving: 0, effect: 0, skill: 0, all: 0};
+    let total: any = {ability: 0, combat: 0, saving: 0, all: 0};
+
     total.ability = this.helperProvider.sumKeys(persona, this.keysProvider.abilityKeys);
     total.ability -= 60;
     total.combat = this.helperProvider.sumKeys(persona, this.keysProvider.combatKeys);
     total.saving = this.helperProvider.sumKeys(persona, this.keysProvider.savingKeys);
-    total.all = total.ability + total.combat + total.saving;
+    //total.effect = persona.feitos.reduce((total, feito) => total + feito.points, 0);
+    //total.skill = Math.floor((persona.pericias.reduce((total, pericia) => total + pericia.points, 0))/4);
+
+    total.all = total.ability + total.combat + total.saving; // + total.effect + total.skill;
     return total;
   }
 

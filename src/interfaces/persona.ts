@@ -1,3 +1,5 @@
+import { Item } from ".";
+
 export interface Persona {
     id?: number,
     nome: string,
@@ -20,4 +22,7 @@ export interface Persona {
     reflexo: number,
     fortitude: number,
     vontade: number,
+
+    pericias: Item[],
+    feitos: Item[]
 }

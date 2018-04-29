@@ -46,7 +46,14 @@ export class AttributePersonaComponent implements ControlValueAccessor {
   }
 
   writeValue(value: number): void {
-    this.value = value;
+    this.min = Number.isInteger(this.min) ? this.min : 0;
+    if (value < this.min) {
+      this.value = this.min
+    } else if (value > this.max) {
+      this.value = this.max;
+    } else {
+      this.value = value;
+    }
   }
 
   registerOnChange(fn: any): void {

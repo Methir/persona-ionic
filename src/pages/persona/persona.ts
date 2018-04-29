@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { Key, Persona, TotalPoints, HttpSuccessResponse } from './../../interfaces';
+import { Key, Persona, Item, TotalPoints, HttpSuccessResponse } from './../../interfaces';
 import { PersonaProvider, KeysProvider, HelperProvider, AuthProvider } from '../../providers';
 
 @IonicPage()
@@ -20,7 +20,8 @@ export class PersonaPage {
   abilityKeys: Key[];
   combatKeys: Key[];
   savingKeys: Key[];
-  effectItems: any[];
+  effectItems: Item[];
+  skillItems: Item[];
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
@@ -33,6 +34,7 @@ export class PersonaPage {
     this.combatKeys = this.keysProvider.combatKeys;
     this.savingKeys = this.keysProvider.savingKeys;
     this.effectItems = this.keysProvider.effectItems;
+    this.skillItems = this.keysProvider.skillItems;
     console.log('pagina persona carregada...');
   }
 
@@ -44,7 +46,7 @@ export class PersonaPage {
       id : [this.persona.id],
       nome : [ this.persona.nome,
         [ Validators.required,
-          Validators.min(2),
+          Validators.min(1),
           Validators.max(25)] ],
       np : [this.persona.np, Validators.required],
       forca : [ this.persona.forca, Validators.required],
@@ -62,6 +64,8 @@ export class PersonaPage {
       reflexo : [this.persona.reflexo, Validators.required],
       fortitude : [this.persona.fortitude, Validators.required],
       vontade : [this.persona.vontade, Validators.required],
+      pericias : [this.persona.pericias],
+      feitos : [this.persona.feitos],
     });
     this.forms.valueChanges.subscribe(
       (persona) => {
@@ -73,7 +77,7 @@ export class PersonaPage {
 
   savePersona() {
     if (this.forms.invalid) {
-      this.helperProvider.persistAlert('Formulário invalido! Verifique se o nome tem entre 2 e 25 caracteres.');
+      this.helperProvider.persistAlert('Formulário invalido! Verifique se o nome tem entre 1 e 25 caracteres.');
     } else {
       let loading = this.helperProvider.createLoad();
       loading.present();

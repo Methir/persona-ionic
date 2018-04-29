@@ -82,18 +82,28 @@
             </ion-row>
           </card-persona>
         </ion-col>
-      </ion-row>
       <!-- Close Saving Part -->
       <!-- Open effect Part -->
-      <ion-row>
         <ion-col col-12 col-ms-12 col-md-12 col-lg-6 col-xl-6>
           <card-persona label="Feitos">
-            <dinamic-list-persona [items]="effectItems">
+            <dinamic-list-persona [itemsList]="effectItems"
+                                  formControlName="feitos"
+            >
+            </dinamic-list-persona>
+          </card-persona>
+        </ion-col>
+      <!-- Close effect Part -->
+      <!-- Open skill Part -->
+        <ion-col col-12 col-ms-12 col-md-12 col-lg-6 col-xl-6>
+          <card-persona label="Pericias">
+            <dinamic-list-persona [itemsList]="skillItems"
+                                  formControlName="pericias"
+            >
             </dinamic-list-persona>
           </card-persona>
         </ion-col>
       </ion-row>
-      <!-- Close Saving Part -->
+      <!-- Close skill Part -->      
     </form>
     <form-debug [form]="forms"></form-debug>
     <!--info-debug [obj]="ability.hidden"></info-debug-->

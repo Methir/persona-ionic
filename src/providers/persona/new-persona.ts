@@ -1,3 +1,5 @@
+import { Item } from "../../interfaces";
+
 export class NewPersona {
     nome: string ='noob';
     np: number = 0;
@@ -19,4 +21,7 @@ export class NewPersona {
     reflexo: number = 0;
     fortitude: number = 0;
     vontade: number = 0;
+
+    feitos: Item[] = [];
+    pericias: Item[] = [];
 }

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 
-import { Key } from './../../interfaces/key';
-import { newEffect } from './new-effect-keys';
+import { Item, Key } from '../../interfaces';
+import { Effect } from './new-effect-keys';
+import { Skill } from './new-skill-keys';
 
 @Injectable()
 export class KeysProvider {
@@ -40,8 +41,12 @@ export class KeysProvider {
     ];
   }
 
-  get effectItems(): any[] {
-    return (new newEffect).items; 
+  get skillItems(): Item[] {
+    return (new Skill).items; 
+  }
+
+  get effectItems(): Item[] {
+    return (new Effect).items; 
   }
 
 }

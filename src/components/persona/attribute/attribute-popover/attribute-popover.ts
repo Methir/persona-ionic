@@ -1,19 +1,15 @@
 import { Component } from '@angular/core';
 import { NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the AttributePopoverComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
+import { Item } from '../../../../interfaces';
+
 @Component({
   selector: 'attribute-popover',
   templateUrl: 'attribute-popover.html'
 })
 export class AttributePopoverComponent {
 
-  items: any[];
+  items: Item[];
 
   constructor(public navParams: NavParams) {
     this.initializeItems();
