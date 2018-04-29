@@ -8,7 +8,7 @@ import { ToastController, LoadingController } from 'ionic-angular';
 @Injectable()
 export class HelperProvider {
 
-  public readonly baseUrl: string = 'http://127.0.0.1:8000';
+  public readonly baseUrl: string = 'http://alika-persona.esy.es/painel';
 
   constructor(  public http: HttpClient,
                 private loadingCtrl: LoadingController,
