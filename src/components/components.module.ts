@@ -12,6 +12,7 @@ import { AttributePersonaComponent } from './persona/attribute/attribute-persona
 import { CardPersonaComponent } from './persona/card-persona/card-persona';
 import { AttributePopoverComponent } from './persona/attribute/attribute-popover/attribute-popover';
 import { DinamicListPersonaComponent } from './persona/attribute/dinamic-list-persona/dinamic-list-persona';
+import { ModalPersonaComponent } from './persona/modal-persona/modal-persona';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { DinamicListPersonaComponent } from './persona/attribute/dinamic-list-pe
     	CardPersonaComponent,
     	AttributePopoverComponent,
    		DinamicListPersonaComponent,
+    	ModalPersonaComponent,
 	],
 	imports: [
 		IonicModule
@@ -43,6 +45,7 @@ import { DinamicListPersonaComponent } from './persona/attribute/dinamic-list-pe
     	CardPersonaComponent,
     	AttributePopoverComponent,
     	DinamicListPersonaComponent,
+    	ModalPersonaComponent,
 	]
 })
 export class ComponentsModule { }

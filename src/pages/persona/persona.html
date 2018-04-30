@@ -15,6 +15,11 @@
       > 
         <ion-icon name="cloud-upload"></ion-icon>
       </button>
+      <button ion-fab color="primary" 
+              (click)="presentPersonaModal()"
+      > 
+        <ion-icon name="book"></ion-icon>
+      </button>
       <button ion-fab color="danger"
               (click)="deletePersona()"
       >
@@ -106,7 +111,7 @@
       </ion-row>
       <!-- Close skill Part -->      
     </form>
-    <form-debug [form]="forms"></form-debug>
+    <!--form-debug [form]="forms"></form-debug-->
     <!--info-debug [obj]="ability.hidden"></info-debug-->
   </ion-grid>
 </ion-content>

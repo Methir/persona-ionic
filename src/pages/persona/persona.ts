@@ -1,10 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Key, Persona, Item, TotalPoints, HttpSuccessResponse } from './../../interfaces';
 import { PersonaProvider, KeysProvider, HelperProvider, AuthProvider } from '../../providers';
+import { ModalPersonaComponent } from '../../components/persona/modal-persona/modal-persona';
 
 @IonicPage()
 @Component({
@@ -26,6 +27,7 @@ export class PersonaPage {
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               private formBuilder: FormBuilder,
+              public modalCtrl: ModalController,
               private authProvider: AuthProvider,
               private helperProvider: HelperProvider,
               private keysProvider: KeysProvider,
@@ -84,6 +86,9 @@ export class PersonaPage {
       this.personaProvider.savePersona(this.forms.value)
       .subscribe(
         (res: HttpSuccessResponse) => {
+          if (!res.errors) {
+            this.forms.controls['id'].setValue(res.data['id']);
+          }
           this.authProvider.authUser.next(this.authProvider.authUser.getValue());
           loading.dismiss();
           this.helperProvider.timeAlert('Salvo com sucesso!');
@@ -116,6 +121,14 @@ export class PersonaPage {
     }else{
       this.navCtrl.popToRoot();
     }
+  }
+
+  presentPersonaModal() {
+    let modal = this.modalCtrl.create(
+      ModalPersonaComponent, 
+      {persona: this.forms.value, bonus: this.bonusPoints, total: this.totalPoints}
+    );
+    modal.present();
   }
   
 }

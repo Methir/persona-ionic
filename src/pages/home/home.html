@@ -8,7 +8,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
   <ion-fab top right edge>
     <button ion-fab color="secondary"
             [navPush]="personaPage" [navParams]="newPersona">
@@ -19,13 +19,29 @@
   <ion-grid>
     <ion-row justify-content-right>
       <ion-col col-12 col-ms-4 col-md-4 col-lg-4 col-xl-4>
+
         <ion-list>
-          <button ion-item *ngFor="let persona of personas"
-                  [navPush]="personaPage" [navParams]="persona">
-            {{ persona.nome }}
-            <p>Nível de campanha: {{persona.np}}</p>
-          </button> 
+          <ion-list-header>
+            <ion-title>Lista de Personas</ion-title>
+          </ion-list-header>
+          <ion-item-sliding *ngFor="let persona of personas">
+            <button ion-item [navPush]="personaPage" [navParams]="persona">
+              {{ persona.nome }}
+              <p>Nível de campanha: {{persona.np}}</p>
+            </button>
+            <ion-item-options side="right">
+              <button ion-button (click)="presentPersonaModal(persona)">
+                <ion-icon name="book"></ion-icon>
+                Mais
+              </button>
+              <button ion-button color="danger" (click)="deletePersona(persona)">
+                <ion-icon name="trash"></ion-icon>
+                Delete
+              </button>
+            </ion-item-options>
+          </ion-item-sliding> 
         </ion-list>
+
       </ion-col>
     </ion-row>
   </ion-grid>
