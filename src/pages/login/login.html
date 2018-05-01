@@ -6,33 +6,35 @@
   <ion-grid>
     <ion-row justify-content-center>
       <ion-col col-12 col-ms-4 col-md-4 col-lg-4 col-xl-4>
-      <ion-card text-center>
-        <ion-card-header>
-          <ion-card-title>Login</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <form [formGroup]="forms" (ngSubmit)="onSubmit()">
-            <ion-list>
+        <ion-card text-center>
+          <ion-card-header>
+            <ion-card-title>Login</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <form [formGroup]="forms" (ngSubmit)="onSubmit()">
+              <ion-list>
 
-              <ion-item>
-                <ion-label floating>Email</ion-label>
-                <ion-input type="email" formControlName="username"></ion-input>
-              </ion-item>
+                <ion-item>
+                  <ion-label floating>Email</ion-label>
+                  <ion-input type="email" formControlName="username"></ion-input>
+                </ion-item>
 
-              <ion-item>
-                <ion-label floating>Senha</ion-label>
-                <ion-input type="password" formControlName="password"></ion-input>
-              </ion-item>  
+                <ion-item>
+                  <ion-label floating>Senha</ion-label>
+                  <ion-input type="password" formControlName="password"></ion-input>
+                </ion-item>  
 
-              <button type="submit" [disabled]="forms.invalid"
-                      ion-button round large>
-                Entrar
-              </button>
-
-            </ion-list>
-          </form>
-        </ion-card-content>
-      </ion-card>
+                <ion-item text-center>
+                  <button type="submit" [disabled]="forms.invalid"
+                          ion-button round large>
+                    Entrar
+                  </button>
+                </ion-item>
+                
+              </ion-list>
+            </form>
+          </ion-card-content>
+        </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
