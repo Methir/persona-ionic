@@ -11,7 +11,8 @@
   <ion-card>
     <ion-card-header>
       <ion-card-title>{{ persona.nome}}</ion-card-title>
-      Nível de campanha: {{ persona.np }}
+      Nível de campanha: {{ persona.np }} -
+      Total de pontos: {{ total.all }}
     </ion-card-header>
     <ion-card-content>
 
@@ -78,7 +79,7 @@
           <ion-chip *ngFor="let pericia of persona.pericias">
             <ion-label>
               {{ pericia.label }} 
-              ({{ (bonus[pericia.bonusKeys] + pericia.points)|truncateNumber }})
+              ({{ (bonus[pericia.bonusKey] + pericia.points)|truncateNumber }})
               {{ pericia.points }}pp                  
             </ion-label>
           </ion-chip>

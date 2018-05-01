@@ -123,7 +123,7 @@ export class PersonaPage {
     }
   }
 
-  presentPersonaModal() {
+  presentModalPersona() {
     let modal = this.modalCtrl.create(
       ModalPersonaComponent, 
       {persona: this.forms.value, bonus: this.bonusPoints, total: this.totalPoints}

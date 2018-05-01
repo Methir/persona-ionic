@@ -10,9 +10,9 @@ import { FormDebugComponent } from './form-debug/form-debug';
 import { InfoDebugComponent } from './info-debug/info-debug';
 import { AttributePersonaComponent } from './persona/attribute/attribute-persona/attribute-persona';
 import { CardPersonaComponent } from './persona/card-persona/card-persona';
-import { AttributePopoverComponent } from './persona/attribute/attribute-popover/attribute-popover';
 import { DinamicListPersonaComponent } from './persona/attribute/dinamic-list-persona/dinamic-list-persona';
 import { ModalPersonaComponent } from './persona/modal-persona/modal-persona';
+import { ModalAttributeComponent } from './persona/attribute/modal-attribute/modal-attribute';
 
 
 @NgModule({
@@ -26,9 +26,9 @@ import { ModalPersonaComponent } from './persona/modal-persona/modal-persona';
 		AttributePersonaComponent,
 		TruncateNumberPipe,
     	CardPersonaComponent,
-    	AttributePopoverComponent,
    		DinamicListPersonaComponent,
     	ModalPersonaComponent,
+    	ModalAttributeComponent,
 	],
 	imports: [
 		IonicModule
@@ -43,9 +43,9 @@ import { ModalPersonaComponent } from './persona/modal-persona/modal-persona';
 		AttributePersonaComponent,
 		TruncateNumberPipe,
     	CardPersonaComponent,
-    	AttributePopoverComponent,
     	DinamicListPersonaComponent,
     	ModalPersonaComponent,
+    	ModalAttributeComponent,
 	]
 })
 export class ComponentsModule { }

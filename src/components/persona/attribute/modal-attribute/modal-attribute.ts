@@ -1,18 +1,19 @@
+import { NavParams, ViewController } from 'ionic-angular';
 import { Component } from '@angular/core';
-import { NavParams } from 'ionic-angular';
 
-import { Item } from '../../../../interfaces';
+import { Item } from './../../../../interfaces/item';
 
 @Component({
-  selector: 'attribute-popover',
-  templateUrl: 'attribute-popover.html'
+  selector: 'modal-attribute',
+  templateUrl: 'modal-attribute.html'
 })
-export class AttributePopoverComponent {
+export class ModalAttributeComponent {
 
   onChange: any;
   items: Item[];
 
-  constructor(public navParams: NavParams) {
+  constructor(public navParams: NavParams,
+              public viewCtrl: ViewController) {
     this.initializeItems();
     this.onChange = this.navParams.data['callback'];
   }
@@ -36,5 +37,9 @@ export class AttributePopoverComponent {
         return (item.label.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
     }
+  }
+
+  close() {
+    this.viewCtrl.dismiss(null);
   }
 }

@@ -1,9 +1,9 @@
 import { Component, Input, forwardRef } from '@angular/core';
-import { PopoverController } from 'ionic-angular';
+import { ModalController } from 'ionic-angular';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
-import { AttributePopoverComponent } from '../attribute-popover/attribute-popover';
 import { Item } from '../../../../interfaces';
+import { ModalAttributeComponent } from '../modal-attribute/modal-attribute';
 
 export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
@@ -22,7 +22,7 @@ export class DinamicListPersonaComponent implements ControlValueAccessor {
   @Input() bonus: any[];
   private onChange;
 
-  constructor(public popoverCtrl: PopoverController) {
+  constructor(public modalCtrl: ModalController) {
     console.log('Hello DinamicListPersonaComponent Component');
   }
 
@@ -37,14 +37,12 @@ export class DinamicListPersonaComponent implements ControlValueAccessor {
     return items;
   }
 
-  presentAttrbutePopover(event) {
-    let popover = this.popoverCtrl.create(
-      AttributePopoverComponent, 
+  presentModalAttribute(event) {
+    let modal = this.modalCtrl.create(
+      ModalAttributeComponent, 
       {itemsList: this.itemsList, callback: () => this.change() }
     );
-    popover.present({
-      ev: event
-    });
+    modal.present();
   }
 
   writeValue(items: Item[]): void {
