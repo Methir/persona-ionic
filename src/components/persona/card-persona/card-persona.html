@@ -1,6 +1,10 @@
 <ion-card>
     <ion-card-header (click)="content.hidden = !content.hidden" text-center>
-      <a>{{ label }}<span *ngIf="points || points == 0">({{ points }}pp)</span></a>
+        <a>
+            {{ label }}
+            <span *ngIf="points || points == 0">({{ points }}pp)</span>
+            <ion-icon [name]="(content.hidden)?'ios-arrow-down':'ios-arrow-up'"></ion-icon>
+          </a>
     </ion-card-header>
     <div #content>
       <ng-content></ng-content>
