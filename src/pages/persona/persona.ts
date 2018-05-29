@@ -102,10 +102,10 @@ export class PersonaPage {
   }
 
   deletePersona() {
-    if (this.persona.id) {
+    if (this.forms.value['id']) {
       let loading = this.helperProvider.createLoad();
       loading.present();
-      this.personaProvider.deletePersona(this.persona.id)
+      this.personaProvider.deletePersona(this.forms.value['id'])
       .subscribe(
         (res: HttpSuccessResponse) => {
           this.authProvider.authUser.next(this.authProvider.authUser.getValue());
