@@ -1,6 +1,6 @@
 {
-  "name": "Alika Persona",
-  "short_name": "Alika Persona",
+  "name": "Persona Creator",
+  "short_name": "Persona Creator",
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{
