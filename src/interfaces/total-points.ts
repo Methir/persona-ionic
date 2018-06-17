@@ -1,8 +1,8 @@
 export interface TotalPoints{
-    ability: number,
-    combat: number,
-    saving: number,
-    effect: number,
-    skill: number,
+    habilidade: number,
+    combate: number,
+    salvamento: number,
+    feito: number,
+    pericia: number,
     all: number,
 }

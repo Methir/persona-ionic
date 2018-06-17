@@ -10,13 +10,13 @@
     <ion-col  col-12 col-ms-6 col-md-6 col-lg-6 col-xl-6
               *ngFor="let item of items"
     >
-      <attribute-persona  [label]="item.label"
-                          [min]="item.min" [max]="item.max"
-                          [(ngModel)]="item.points"
+      <attribute-persona  [label]="item.nome"
+                          [min]="item.graduacao_min" [max]="item.graduacao_max"
+                          [(ngModel)]="item.graduacao"
                           (ngModelChange)="change()"
                           (swipe)="item.checked = false; change()"
       >
-        <span *ngIf="bonus && item.bonusKey">({{(bonus[item.bonusKey]+item.points)|truncateNumber}})</span>
+        <span *ngIf="bonus && item.habilidade_chave">({{(bonus[item.habilidade_chave]+item.graduacao)|truncateNumber}})</span>
       </attribute-persona>
     </ion-col>
   </ion-row>  

@@ -21,8 +21,8 @@ export class PersonaPage {
   abilityKeys: Key[];
   combatKeys: Key[];
   savingKeys: Key[];
-  effectItems: Item[];
-  skillItems: Item[];
+  feitoItems: Item[];
+  periciaItems: Item[];
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
@@ -35,8 +35,8 @@ export class PersonaPage {
     this.abilityKeys = this.keysProvider.abilityKeys;
     this.combatKeys = this.keysProvider.combatKeys;
     this.savingKeys = this.keysProvider.savingKeys;
-    this.effectItems = this.keysProvider.effectItems;
-    this.skillItems = this.keysProvider.skillItems;
+    this.feitoItems = this.keysProvider.feitoItems;
+    this.periciaItems = this.keysProvider.periciaItems;
     console.log('pagina persona carregada...');
   }
 
@@ -48,8 +48,8 @@ export class PersonaPage {
       id : [this.persona.id],
       nome : [ this.persona.nome,
         [ Validators.required,
-          Validators.min(1),
-          Validators.max(25)] ],
+          Validators.minLength(1),
+          Validators.maxLength(25)] ],
       np : [this.persona.np, Validators.required],
       forca : [ this.persona.forca, Validators.required],
       destreza : [this.persona.destreza, Validators.required],

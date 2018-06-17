@@ -1,9 +1,9 @@
 export interface Item{
     id: number,
-    label: string,
-    points: number,
-    checked?: boolean,
-    max?: number,
-    min?: number,
-    bonusKey?: string,
+    nome: string,
+    graduacao: number,
+    checked: boolean,
+    graduacao_max?: number,
+    graduacao_min?: number,
+    habilidade_chave?: string,
 }

@@ -54,7 +54,7 @@ export class DinamicListPersonaComponent implements ControlValueAccessor {
         
         if (index >= 0) {
           this.itemsList[index].checked = true;
-          this.itemsList[index].points = item.points;
+          this.itemsList[index].graduacao = item.graduacao;
         }
       });
     } 

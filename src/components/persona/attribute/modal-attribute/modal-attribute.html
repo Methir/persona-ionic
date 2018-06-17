@@ -12,7 +12,7 @@
   <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
   <ion-list>
     <ion-item *ngFor="let item of items">
-      <ion-label>{{item.label}}</ion-label>
+      <ion-label>{{item.nome}}</ion-label>
       <ion-checkbox [(ngModel)]="item.checked" (ngModelChange)="change()"></ion-checkbox>
     </ion-item>
   </ion-list>

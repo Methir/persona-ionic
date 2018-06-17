@@ -19,7 +19,7 @@
 
       <ion-card>
         <ion-card-header>
-          Habilidades {{ total.ability }}pp
+          Habilidades {{ total.habilidade }}pp
         </ion-card-header>
         <ion-card-content>
           <ion-chip *ngFor="let abilityKey of abilityKeys">
@@ -33,7 +33,7 @@
 
       <ion-card>
         <ion-card-header>
-          Combate {{ total.combat }}pp
+          Combate {{ total.combate }}pp
         </ion-card-header>
         <ion-card-content>
           <ion-chip *ngFor="let combatKey of combatKeys">
@@ -47,7 +47,7 @@
 
       <ion-card>
         <ion-card-header>
-          Salvamentos {{ total.saving }}pp
+          Salvamentos {{ total.salvamento }}pp
         </ion-card-header>
         <ion-card-content>
           <ion-chip *ngFor="let savingKey of savingKeys">
@@ -61,12 +61,12 @@
 
       <ion-card>
         <ion-card-header>
-          Feitos {{ total.effect }}pp
+          Feitos {{ total.feito }}pp
         </ion-card-header>
         <ion-card-content>
             <ion-chip *ngFor="let feito of persona.feitos">
               <ion-label>
-                  {{ feito.label }} {{ feito.points }}pp                  
+                  {{ feito.nome }} {{ feito.graduacao }}pp                  
               </ion-label>
             </ion-chip>
         </ion-card-content>
@@ -74,14 +74,14 @@
       
       <ion-card>
         <ion-card-header>
-          Pericias {{ total.skill }}pp
+          Pericias {{ total.pericia }}pp
         </ion-card-header>
         <ion-card-content>
           <ion-chip *ngFor="let pericia of persona.pericias">
             <ion-label>
-              {{ pericia.label }} 
-              ({{ (bonus[pericia.bonusKey] + pericia.points)|truncateNumber }})
-              {{ pericia.points }}pp                  
+              {{ pericia.nome }} 
+              ({{ (bonus[pericia.habilidade_chave] + pericia.graduacao)|truncateNumber }})
+              {{ pericia.graduacao }}pp                  
             </ion-label>
           </ion-chip>
         </ion-card-content>
