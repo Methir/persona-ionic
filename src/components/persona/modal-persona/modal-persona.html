@@ -80,7 +80,7 @@
           <ion-chip *ngFor="let pericia of persona.pericias">
             <ion-label>
               {{ pericia.nome }} 
-              ({{ (bonus[pericia.habilidade_chave] + pericia.graduacao)|truncateNumber }})
+              <span *ngIf="bonus[pericia.habilidade_chave]">({{ (bonus[pericia.habilidade_chave] + pericia.graduacao)|truncateNumber }})</span>
               {{ pericia.graduacao }}pp                  
             </ion-label>
           </ion-chip>

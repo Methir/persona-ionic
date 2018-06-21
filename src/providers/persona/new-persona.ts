@@ -24,4 +24,5 @@ export class NewPersona {
 
     feitos: Item[] = [];
     pericias: Item[] = [];
+    poderes: any[] = [];
 }

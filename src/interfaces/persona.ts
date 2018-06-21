@@ -24,5 +24,6 @@ export interface Persona {
     vontade: number,
 
     pericias: Item[],
-    feitos: Item[]
+    feitos: Item[],
+    poderes: any[],
 }
