@@ -20,7 +20,7 @@ export class NpPersonaComponent {
 
   constructor() {
     console.log('Hello NpPersonaComponent Component');
-    for(let i: number = 0; i<=20; i++) {
+    for(let i: number = 1; i<=20; i++) {
       this.valueOptions.push(i);
     }
   }

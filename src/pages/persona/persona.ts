@@ -68,6 +68,7 @@ export class PersonaPage {
       vontade : [this.persona.vontade, Validators.required],
       feitos : [this.persona.feitos],
       pericias : [this.persona.pericias],
+      poderes : [this.persona.poderes],
     });
     this.forms.valueChanges.subscribe(
       (persona) => {

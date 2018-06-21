@@ -2,8 +2,8 @@
     <ion-label>
       <ng-content></ng-content>
       {{label}}
-      <ion-badge *ngIf="value || value == 0">{{ value }}pp</ion-badge>
     </ion-label>
+    <ion-badge item-end *ngIf="value || value == 0">{{ value }}pp</ion-badge>
     <button ion-fab color="danger" 
             item-end mini
             (click)="decrement()">

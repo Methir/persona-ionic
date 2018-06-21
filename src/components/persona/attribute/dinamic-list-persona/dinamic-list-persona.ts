@@ -37,7 +37,7 @@ export class DinamicListPersonaComponent implements ControlValueAccessor {
     return items;
   }
 
-  presentModalAttribute(event) {
+  presentModalAttribute() {
     let modal = this.modalCtrl.create(
       ModalAttributeComponent, 
       {itemsList: this.itemsList, callback: () => this.change() }
@@ -47,8 +47,8 @@ export class DinamicListPersonaComponent implements ControlValueAccessor {
 
   writeValue(items: Item[]): void {
     if (items) { 
-      items.forEach((item) => {
-        let index = this.itemsList.findIndex((itemList) => {
+      items.forEach((item: Item) => {
+        let index = this.itemsList.findIndex((itemList: Item) => {
           return itemList.id == item.id;
         });
         

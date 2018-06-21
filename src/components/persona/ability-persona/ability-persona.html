@@ -1,5 +1,5 @@
 <ion-item>
-  <ion-label>{{label}}({{ (abilityValue-10)/2 | truncateNumber}})</ion-label>
+  <ion-label>({{ (abilityValue-10)/2 | truncateNumber}}) {{label}}</ion-label>
   <ion-select [(ngModel)]="abilityValue" interface="popover">
     <ion-option *ngFor="let valueOption of valueOptions" 
                 [value]="valueOption">
