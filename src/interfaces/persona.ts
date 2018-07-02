@@ -88,5 +88,4 @@ export interface PowerOption {
     modificador_max: number,
     modificadores: number[],
     checked: boolean
-
 }
