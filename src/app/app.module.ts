@@ -6,7 +6,7 @@ import { IonicStorageModule } from '@ionic/storage';
 
 import { MyApp } from './app.component';
 
-import { AuthProvider, HelperProvider, KeysProvider, PersonaProvider } from '../providers';
+import { AuthProvider, HelperProvider, PersonaProvider } from '../providers';
 import { PersonaPageModule } from './../pages/persona/persona.module';
 import { HomePageModule } from '../pages/home/home.module';
 import { LoginPageModule } from '../pages/login/login.module';
@@ -44,7 +44,6 @@ import { ModalPowerDetailsComponent } from './../components/persona/power/modal-
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    KeysProvider,
     PersonaProvider,
     AuthProvider,
     HelperProvider

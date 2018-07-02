@@ -78,7 +78,7 @@
                         *ngFor="let combatKey of combatKeys">
                 <attribute-persona  [label]="combatKey.label"
                                     formControlName="{{combatKey.name}}">
-                  ({{bonusPoints[combatKey.name]|truncateNumber}})
+                  ({{persona.bonusPoints[combatKey.name]|truncateNumber}})
                 </attribute-persona>
               </ion-col>
             </ion-row>
@@ -93,7 +93,7 @@
                         *ngFor="let savingKey of savingKeys">
                 <attribute-persona  [label]="savingKey.label" 
                                     formControlName="{{savingKey.name}}">
-                  ({{bonusPoints[savingKey.name]|truncateNumber}})
+                  ({{persona.bonusPoints[savingKey.name]|truncateNumber}})
                 </attribute-persona>
               </ion-col>
             </ion-row>
@@ -114,7 +114,7 @@
         <ion-col col-12 col-ms-12 col-md-12 col-lg-6 col-xl-6>
           <card-persona label="Pericias" [points]="totalPoints.pericia">
             <dinamic-list-persona itemsType="pericias"
-                                  [bonus]="bonusPoints"
+                                  [bonus]="persona.bonusPoints"
                                   formControlName="pericias"
             >
             </dinamic-list-persona>

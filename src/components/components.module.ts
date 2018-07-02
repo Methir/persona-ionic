@@ -2,9 +2,7 @@ import { NgModule } from '@angular/core';
 import { IonicModule } from 'ionic-angular';
 
 import { TruncateNumberPipe } from './../pipes/truncate-number.pipe';
-import { NamePersonaComponent } from './persona/header/name-persona/name-persona';
-import { NpPersonaComponent } from './persona/header/np-persona/np-persona';
-import { PpPersonaComponent } from './persona/header/pp-persona/pp-persona';
+import { NpPersonaComponent } from './persona/np-persona/np-persona';
 import { AbilityPersonaComponent } from './persona/ability-persona/ability-persona';
 import { FormDebugComponent } from './form-debug/form-debug';
 import { InfoDebugComponent } from './info-debug/info-debug';
@@ -19,9 +17,7 @@ import { ModalPowerDetailsComponent } from './persona/power/modal-power-details/
 
 @NgModule({
 	declarations: [
-		NamePersonaComponent,
     	NpPersonaComponent,
-    	PpPersonaComponent,
 		AbilityPersonaComponent,
     	FormDebugComponent,
     	InfoDebugComponent,
@@ -39,9 +35,7 @@ import { ModalPowerDetailsComponent } from './persona/power/modal-power-details/
 		IonicModule
 	],
 	exports: [
-		NamePersonaComponent,
     	NpPersonaComponent,
-    	PpPersonaComponent,
 		AbilityPersonaComponent,
     	FormDebugComponent,
     	InfoDebugComponent,

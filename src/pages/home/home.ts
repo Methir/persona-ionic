@@ -66,7 +66,6 @@ export class HomePage {
     let modal = this.modalCtrl.create(
       ModalPersonaComponent, 
       { persona: persona, 
-        bonus: this.personaProvider.getBonusPoints(persona), 
         total: this.personaProvider.getTotalPoints(persona)
       }
     );

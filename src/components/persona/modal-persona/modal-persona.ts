@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavParams, ViewController } from 'ionic-angular';
 
 import { Persona, Key, TotalPoints } from '../../../interfaces';
-import { KeysProvider } from '../../../providers';
 
 @Component({
   selector: 'modal-persona',
@@ -11,21 +10,20 @@ import { KeysProvider } from '../../../providers';
 export class ModalPersonaComponent {
 
   total: TotalPoints;
-  bonus: Persona;
+  bonus: any;
   persona: Persona;
   abilityKeys: Key[];
   combatKeys: Key[];
   savingKeys: Key[];
 
   constructor(public navParams: NavParams, 
-              private keysProvider: KeysProvider,
               public viewCtrl: ViewController ) {
     console.log('Hello ModalPersonaComponent Component');
-    this.abilityKeys = this.keysProvider.abilityKeys;
-    this.combatKeys = this.keysProvider.combatKeys;
-    this.savingKeys = this.keysProvider.savingKeys;
-    this.persona = this.navParams.data['persona'];
-    this.bonus = this.navParams.data['bonus'];
+    this.persona = new Persona(this.navParams.data['persona']);
+    this.abilityKeys = this.persona.abilityKeys;
+    this.combatKeys = this.persona.combatKeys;
+    this.savingKeys = this.persona.savingKeys;
+    this.bonus = this.persona.bonusPoints;
     this.total = this.navParams.data['total'];
   }
 
