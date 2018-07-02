@@ -4,6 +4,8 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 import { Item } from '../../../../interfaces';
 import { ModalAttributeComponent } from '../modal-attribute/modal-attribute';
+import { Pericia } from '../periciasList';
+import { Feito } from './../feitosList';
 
 export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
@@ -18,12 +20,22 @@ export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
 })
 export class DinamicListPersonaComponent implements ControlValueAccessor {
 
-  @Input() itemsList: Item[];
+  @Input() itemsType: string;
+  itemsList: Item[];
   @Input() bonus: any[];
   private onChange;
 
   constructor(public modalCtrl: ModalController) {
     console.log('Hello DinamicListPersonaComponent Component');
+  }
+
+  ngOnInit(): void {
+    this.itemsType = this.itemsType.toLocaleLowerCase();
+    if (this.itemsType === 'feitos') {
+      this.itemsList = new Feito().items;
+    }else if (this.itemsType === 'pericias') {
+      this.itemsList = new Pericia().items;
+    }
   }
 
   change() {

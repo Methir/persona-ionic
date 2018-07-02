@@ -1,4 +1,4 @@
-import { Item } from "../../interfaces";
+import { Item } from "../../../interfaces";
 
 export class Feito {
     items: Item[] = [

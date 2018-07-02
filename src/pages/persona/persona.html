@@ -103,7 +103,7 @@
         <!-- Open Feito Part -->
         <ion-col col-12 col-ms-12 col-md-12 col-lg-6 col-xl-6>
           <card-persona label="Feitos" [points]="totalPoints.feito">
-            <dinamic-list-persona [itemsList]="feitoItems"
+            <dinamic-list-persona itemsType="feitos"
                                   formControlName="feitos"
             >
             </dinamic-list-persona>
@@ -113,7 +113,7 @@
         <!-- Open Pericia Part -->
         <ion-col col-12 col-ms-12 col-md-12 col-lg-6 col-xl-6>
           <card-persona label="Pericias" [points]="totalPoints.pericia">
-            <dinamic-list-persona [itemsList]="periciaItems"
+            <dinamic-list-persona itemsType="pericias"
                                   [bonus]="bonusPoints"
                                   formControlName="pericias"
             >
@@ -130,8 +130,8 @@
         </ion-col>
         <!-- Close Poder Part -->
       </ion-row>
-      <!--form-debug [form]="forms"></form-debug-->
-      <info-debug [obj]="forms.value.poderes"></info-debug>
+      <form-debug [form]="forms"></form-debug>
+      <!--info-debug [obj]="forms.value.poderes"></info-debug-->
     </form>      
   </ion-grid>
 </ion-content>

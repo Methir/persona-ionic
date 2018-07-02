@@ -1,8 +1,9 @@
-import { FalhasList } from './../falhasList';
-import { Power } from '../../../../interfaces';
 import { NavParams, ViewController } from 'ionic-angular';
 import { Component } from '@angular/core';
+
 import { ExtrasList } from '../extrasList';
+import { FalhasList } from './../falhasList';
+import { Power } from '../../../../interfaces';
 
 @Component({
   selector: 'modal-power-details',
