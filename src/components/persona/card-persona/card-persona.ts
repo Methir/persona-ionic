@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Platform } from 'ionic-angular';
+import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 
 /**
  * Generated class for the CardPersonaComponent component.
@@ -14,9 +15,16 @@ export class CardPersonaComponent {
 
   @Input() label;
   @Input() points;
+  @ViewChild('content') content: ElementRef; 
 
-  constructor() {
+  constructor(public platform: Platform) {
     console.log('Hello CardPersonaComponent Component');
+  }
+
+  ngOnInit(): void {
+    if (this.platform.is('mobile')) {
+      this.content.nativeElement.hidden = true;
+    }    
   }
 
 }

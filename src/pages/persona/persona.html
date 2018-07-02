@@ -56,7 +56,7 @@
           </card-persona>
         </ion-col>
         <!-- Close Header Part -->
-        <!-- Open Ability Part -->
+        <!-- Open Habilidade Part -->
         <ion-col col-12>
           <card-persona label="Habilidades" [points]="totalPoints.habilidade">
             <ion-row>
@@ -69,8 +69,8 @@
             </ion-row>
           </card-persona>
         </ion-col>
-        <!-- Close Ability Part -->
-        <!-- Open Combat Part -->
+        <!-- Close Habilidade Part -->
+        <!-- Open Combate Part -->
         <ion-col col-12 col-ms-12 col-md-12 col-lg-6 col-xl-6>
           <card-persona label="Combate" [points]="totalPoints.combate">
             <ion-row>
@@ -84,8 +84,8 @@
             </ion-row>
           </card-persona>
         </ion-col>
-        <!-- Close Combat Part -->
-        <!-- Open Salving Part -->
+        <!-- Close Combate Part -->
+        <!-- Open Salvamento Part -->
         <ion-col col-12 col-ms-12 col-md-12 col-lg-6 col-xl-6>
           <card-persona label="Salvamentos" [points]="totalPoints.salvamento">
             <ion-row>
@@ -99,8 +99,8 @@
             </ion-row>
           </card-persona>
         </ion-col>
-        <!-- Close Saving Part -->
-        <!-- Open effect Part -->
+        <!-- Close Salvamento Part -->
+        <!-- Open Feito Part -->
         <ion-col col-12 col-ms-12 col-md-12 col-lg-6 col-xl-6>
           <card-persona label="Feitos" [points]="totalPoints.feito">
             <dinamic-list-persona [itemsList]="feitoItems"
@@ -109,8 +109,8 @@
             </dinamic-list-persona>
           </card-persona>
         </ion-col>
-        <!-- Close effect Part -->
-        <!-- Open skill Part -->
+        <!-- Close Feito Part -->
+        <!-- Open Pericia Part -->
         <ion-col col-12 col-ms-12 col-md-12 col-lg-6 col-xl-6>
           <card-persona label="Pericias" [points]="totalPoints.pericia">
             <dinamic-list-persona [itemsList]="periciaItems"
@@ -120,10 +120,18 @@
             </dinamic-list-persona>
           </card-persona>
         </ion-col>
-        <!-- Close skill Part -->
+        <!-- Close Pericia Part -->
+        <!-- Open Poder Part -->
+        <ion-col col-12>
+          <card-persona label="Poderes" [points]="totalPoints.poder">
+            <dinamic-list-power formControlName="poderes">    
+            </dinamic-list-power>
+          </card-persona>
+        </ion-col>
+        <!-- Close Poder Part -->
       </ion-row>
-      <form-debug [form]="forms"></form-debug>
-      <!--info-debug [obj]="ability.hidden"></info-debug-->
+      <!--form-debug [form]="forms"></form-debug-->
+      <info-debug [obj]="forms.value.poderes"></info-debug>
     </form>      
   </ion-grid>
 </ion-content>

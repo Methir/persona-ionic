@@ -61,6 +61,25 @@
 
       <ion-card>
         <ion-card-header>
+          Poderes {{ total.poder }}pp
+        </ion-card-header>
+        <ion-card-content>
+          <span *ngFor="let poder of persona.poderes">
+            <ion-chip>
+              <ion-label>{{ poder.nome }} {{ poder.graduacao }}</ion-label>
+            </ion-chip>
+            (<span *ngFor="let extra of poder.extras">
+              {{ extra.nome }} +{{ extra.modificador }},
+            </span>
+            <span *ngFor="let falha of poder.falhas">
+              {{ falha.nome }} -{{ falha.modificador }},
+            </span>)
+          </span>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-header>
           Feitos {{ total.feito }}pp
         </ion-card-header>
         <ion-card-content>

@@ -4,5 +4,6 @@ export interface TotalPoints{
     salvamento: number,
     feito: number,
     pericia: number,
+    poder: number,
     all: number,
 }

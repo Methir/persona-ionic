@@ -14,6 +14,8 @@ import { AuthInterceptor } from '../interceptors/auth.interceptor';
 import { TokenInterceptor } from '../interceptors/token.interceptor';
 import { ModalPersonaComponent } from '../components/persona/modal-persona/modal-persona';
 import { ModalAttributeComponent } from '../components/persona/attribute/modal-attribute/modal-attribute';
+import { ModalPowerComponent } from './../components/persona/power/modal-power/modal-power';
+import { ModalPowerDetailsComponent } from './../components/persona/power/modal-power-details/modal-power-details';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { ModalAttributeComponent } from '../components/persona/attribute/modal-a
   entryComponents: [
     MyApp,
     ModalPersonaComponent,
-    ModalAttributeComponent
+    ModalAttributeComponent,
+    ModalPowerComponent,
+    ModalPowerDetailsComponent
   ],
   providers: [
     //StatusBar,

@@ -1,0 +1,20 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons right>
+          <a ion-button (click)="close()">fechar</a>
+        </ion-buttons>
+        <ion-title>Opções</ion-title> 
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content text-center>
+  
+    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+    <ion-list>
+      <ion-item *ngFor="let power of powers">
+        <ion-label>{{power.nome}}</ion-label>
+        <ion-checkbox [(ngModel)]="power.checked" (ngModelChange)="change()"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+  
+  </ion-content>

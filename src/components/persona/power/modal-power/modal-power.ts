@@ -1,21 +1,19 @@
 import { NavParams, ViewController } from 'ionic-angular';
 import { Component } from '@angular/core';
 
-import { Item } from './../../../../interfaces';
+import { Power } from '../../../../interfaces';
 
 @Component({
-  selector: 'modal-attribute',
-  templateUrl: 'modal-attribute.html'
+  selector: 'modal-power',
+  templateUrl: 'modal-power.html'
 })
-export class ModalAttributeComponent {
+export class ModalPowerComponent {
 
-  onChange: any;
-  items: Item[];
+  powers: Power[];
 
   constructor(public navParams: NavParams,
               public viewCtrl: ViewController) {
     this.initializeItems();
-    this.onChange = this.navParams.data['callback'];
   }
 
   change() {
@@ -23,7 +21,7 @@ export class ModalAttributeComponent {
   }
 
   initializeItems() {
-    this.items = this.navParams.data['itemsList'];
+    this.powers = this.navParams.data['powersList'];
   }
 
   getItems(event: any) {
@@ -33,7 +31,7 @@ export class ModalAttributeComponent {
     let val = event.target.value;
     // if the value is an empty string don't filter the items
     if (val && val.trim() != '') {
-      this.items = this.items.filter((item) => {
+      this.powers = this.powers.filter((item) => {
         return (item.nome.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
     }
@@ -42,4 +40,5 @@ export class ModalAttributeComponent {
   close() {
     this.viewCtrl.dismiss(null);
   }
+
 }

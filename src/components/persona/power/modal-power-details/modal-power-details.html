@@ -1,0 +1,155 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons right>
+            <a ion-button (click)="close()">fechar</a>
+        </ion-buttons>
+        <ion-title>Detalhes do Poder</ion-title> 
+    </ion-toolbar>
+</ion-header>
+      
+<ion-content>
+    <ion-card>
+        <ion-card-header text-center>
+            <ion-card-title>{{ power.nome }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-6>
+                        <ion-item>
+                            <ion-label>Graduação</ion-label>
+                            <ion-select [(ngModel)]="power.graduacao" (ngModelChange)="change()"
+                                        interface="popover">
+                                <ion-option *ngFor="let graduacaoOption of graduacaoOptions" 
+                                            [value]="graduacaoOption"
+                                >
+                                    {{graduacaoOption}}
+                                </ion-option>
+                            </ion-select>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col col-6>
+                        <ion-item>
+                            <ion-label>Custo</ion-label>
+                            <ion-select [(ngModel)]="power.custo" (ngModelChange)="change()"
+                                        interface="popover">
+                                <ion-option *ngFor="let custoOption of custoOptions" 
+                                            [value]="custoOption"
+                                >
+                                    {{custoOption}}
+                                </ion-option>
+                            </ion-select>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-card>
+                    <ion-card-header>
+                        <ion-card-title>Extras:</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <ion-row>
+                            <ion-col col-5>
+                                <ion-item>
+                                    <ion-label>Nome</ion-label>
+                                    <ion-select #extra interface="popover">
+                                        <ion-option *ngFor="let extraList of extrasList" 
+                                                    [value]="extraList" 
+                                        >
+                                            {{ extraList.nome }}
+                                        </ion-option>                            
+                                    </ion-select>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col col-5>
+                                <ion-item>
+                                    <ion-label>Modificador</ion-label>
+                                    <ion-select [(ngModel)]="extra.value.modificador" (ngModelChange)="change()"
+                                                [disabled]="!extra.hasValue()" interface="popover"
+                                    >
+                                        <ion-option *ngFor="let modificador of extra.value.modificadores"
+                                                    [value]="modificador" 
+                                        >
+                                            +{{ modificador }}
+                                        </ion-option>                            
+                                    </ion-select>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col col-2>
+                                <button ion-fab color="secondary" mini
+                                        [hidden]="extra.value.checked" 
+                                        [disabled]="!extra.hasValue()" 
+                                        (click)="extra.value.checked = true; change()"
+                                >
+                                    <ion-icon name="add"></ion-icon>
+                                </button>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-12>
+                                <ion-chip *ngFor="let extra of extras">
+                                    <button ion-button clear color="dark" (click)="extra.checked = false; change()">
+                                        <ion-icon name="trash"></ion-icon>
+                                    </button>
+                                    <ion-label>{{ extra.nome }} +{{ extra.modificador }}</ion-label>
+                                </ion-chip>
+                            </ion-col>
+                        </ion-row>
+                    </ion-card-content>
+                </ion-card>
+                <ion-card>
+                    <ion-card-header>
+                        <ion-card-title>Falhas:</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <ion-row>
+                            <ion-col col-5>
+                                <ion-item>
+                                    <ion-label>Nome</ion-label>
+                                    <ion-select #falha interface="popover">
+                                        <ion-option *ngFor="let falhaList of falhasList" 
+                                                    [value]="falhaList" 
+                                        >
+                                            {{ falhaList.nome }}
+                                        </ion-option>                            
+                                    </ion-select>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col col-5>
+                                <ion-item>
+                                    <ion-label>Modificador</ion-label>
+                                    <ion-select [(ngModel)]="falha.value.modificador" (ngModelChange)="change()"
+                                                [disabled]="!falha.hasValue()" interface="popover">
+                                        <ion-option *ngFor="let modificador of falha.value.modificadores" 
+                                                    [value]="modificador" 
+                                        >
+                                            -{{ modificador }}
+                                        </ion-option>                            
+                                    </ion-select>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col col-2>
+                                <button ion-fab color="danger" mini 
+                                        [hidden]="falha.value.checked"
+                                        [disabled]="!falha.hasValue()"
+                                        (click)="falha.value.checked = true; change()" 
+                                >
+                                    <ion-icon name="add"></ion-icon>
+                                </button>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-12>
+                                <ion-chip *ngFor="let falha of falhas">
+                                    <button ion-button clear color="dark" (click)="falha.checked = false; change();">
+                                        <ion-icon name="trash"></ion-icon>
+                                    </button>
+                                    <ion-label>{{ falha.nome }} -{{ falha.modificador }}</ion-label>
+                                </ion-chip>
+                            </ion-col>
+                        </ion-row>
+                    </ion-card-content>
+                </ion-card>
+            </ion-grid>
+        </ion-card-content>
+    </ion-card>
+</ion-content>

@@ -1,0 +1,34 @@
+<ion-list>
+    <ion-fab top right>
+      <button   ion-fab mini color="primary"
+                (click)="presentModalPower()"      
+      >
+        <ion-icon name="ios-more"></ion-icon>
+      </button>
+    </ion-fab>
+    <ion-row>
+        <ion-col    col-12 col-ms-4 col-md-4 col-lg-4 col-xl-4
+                    *ngFor="let power of powers"
+        >
+            <ion-card   text-center (click)="presentModalPowerDetails(power)"
+                        (swipe)="power.checked = false; change()"
+            >
+                <ion-card-header>
+                    <a>{{ power.nome }} {{ power.graduacao }} (x{{ power.custo }})</a>
+                </ion-card-header>
+                <ion-card-content>
+                    <ion-chip *ngFor="let extra of power.extras">
+                        <ion-label>
+                            {{ extra.nome }} +{{ extra.modificador }}
+                        </ion-label>
+                    </ion-chip>
+                    <ion-chip *ngFor="let falha of power.falhas">
+                        <ion-label>
+                            {{ falha.nome }} -{{ falha.modificador }}
+                        </ion-label>
+                    </ion-chip>
+                </ion-card-content>
+            </ion-card>
+        </ion-col>
+    </ion-row>  
+</ion-list>
