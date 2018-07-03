@@ -13,19 +13,19 @@
       <ion-card-title>{{ persona.nome}}</ion-card-title>
       Nível de campanha: {{ persona.np }}
       <br>
-      Total de pontos: {{ total.all }}pp
+      Total de pontos: {{ persona.totalPoints.all }}pp
     </ion-card-header>
     <ion-card-content>
 
       <ion-card>
         <ion-card-header>
-          Habilidades {{ total.habilidade }}pp
+          Habilidades {{ persona.totalPoints.habilidade }}pp
         </ion-card-header>
         <ion-card-content>
-          <ion-chip *ngFor="let abilityKey of abilityKeys">
+          <ion-chip *ngFor="let abilityKey of persona.abilityKeys">
             <ion-label>
               {{ abilityKey.label }} {{ persona[abilityKey.name] }}
-              ({{ bonus[abilityKey.name]|truncateNumber }})
+              ({{ persona.bonusPoints[abilityKey.name]|truncateNumber }})
             </ion-label>
           </ion-chip>
         </ion-card-content>
@@ -33,12 +33,12 @@
 
       <ion-card>
         <ion-card-header>
-          Combate {{ total.combate }}pp
+          Combate {{ persona.totalPoints.combate }}pp
         </ion-card-header>
         <ion-card-content>
-          <ion-chip *ngFor="let combatKey of combatKeys">
+          <ion-chip *ngFor="let combatKey of persona.combatKeys">
             <ion-label>
-              {{ combatKey.label }} ({{ bonus[combatKey.name]|truncateNumber }}) 
+              {{ combatKey.label }} ({{ persona.bonusPoints[combatKey.name]|truncateNumber }}) 
               {{ persona[combatKey.name] }}pp
             </ion-label>
           </ion-chip>
@@ -47,12 +47,12 @@
 
       <ion-card>
         <ion-card-header>
-          Salvamentos {{ total.salvamento }}pp
+          Salvamentos {{ persona.totalPoints.salvamento }}pp
         </ion-card-header>
         <ion-card-content>
-          <ion-chip *ngFor="let savingKey of savingKeys">
+          <ion-chip *ngFor="let savingKey of persona.savingKeys">
             <ion-label>
-              {{ savingKey.label }} ({{ bonus[savingKey.name]|truncateNumber }}) 
+              {{ savingKey.label }} ({{ persona.bonusPoints[savingKey.name]|truncateNumber }}) 
               {{ persona[savingKey.name] }}pp
             </ion-label>
           </ion-chip>
@@ -61,7 +61,7 @@
 
       <ion-card>
         <ion-card-header>
-          Poderes {{ total.poder }}pp
+          Poderes {{ persona.totalPoints.poder }}pp
         </ion-card-header>
         <ion-card-content>
           <span *ngFor="let poder of persona.poderes">
@@ -80,7 +80,7 @@
 
       <ion-card>
         <ion-card-header>
-          Feitos {{ total.feito }}pp
+          Feitos {{ persona.totalPoints.feito }}pp
         </ion-card-header>
         <ion-card-content>
             <ion-chip *ngFor="let feito of persona.feitos">
@@ -93,13 +93,13 @@
       
       <ion-card>
         <ion-card-header>
-          Pericias {{ total.pericia }}pp
+          Pericias {{ persona.totalPoints.pericia }}pp
         </ion-card-header>
         <ion-card-content>
           <ion-chip *ngFor="let pericia of persona.pericias">
             <ion-label>
               {{ pericia.nome }} 
-              <span *ngIf="bonus[pericia.habilidade_chave]">({{ (bonus[pericia.habilidade_chave] + pericia.graduacao)|truncateNumber }})</span>
+              <span *ngIf="persona.bonusPoints[pericia.habilidade_chave]">({{ (persona.bonusPoints[pericia.habilidade_chave] + pericia.graduacao)|truncateNumber }})</span>
               {{ pericia.graduacao }}pp                  
             </ion-label>
           </ion-chip>

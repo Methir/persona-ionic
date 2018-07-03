@@ -1,3 +1,4 @@
+import { TotalPoints } from './total-points';
 import { Item, Key, Power} from './';
 
 export class Persona implements Persona{
@@ -78,35 +79,68 @@ export class Persona implements Persona{
         }
     }
 
-    get abilityKeys(): Key[] {
-        return [
-            { label : "Força", name : "forca" },
-            { label : "Destreza", name : "destreza" }, 
-            { label : "Constituição", name : "constituicao" }, 
-            { label : "Inteligência", name : "inteligencia" }, 
-            { label : "Sabedoria", name : "sabedoria" }, 
-            { label : "Carisma", name : "carisma" }
-        ];
+    get totalPoints(): TotalPoints {    
+        let totalPoints: TotalPoints = {
+            habilidade : this.sumKeys(this.abilityKeys) - 60,
+            combate : this.sumKeys(this.combatKeys),
+            salvamento : this.sumKeys( this.savingKeys),
+            feito : this.feitos.reduce((total, feito) => total + feito.graduacao, 0),
+            pericia : Math.ceil((this.pericias.reduce((total, pericia) => total + pericia.graduacao, 0))/4),
+            poder: this.poderes.reduce((total, poder) => {
+                let custoTotal: number;
+                custoTotal = poder.custo;
+                custoTotal += poder.extras.reduce((total, extra) => {
+                    return total + extra.modificador;
+                }, 0);
+                custoTotal -= poder.falhas.reduce((total, falha) => {
+                    return total + falha.modificador;
+                }, 0);
+
+                if (custoTotal <= 0) {
+                    return total += Math.ceil(poder.graduacao/(2 - custoTotal));
+                } else {
+                    return total += poder.graduacao * custoTotal;
+                }
+            }, 0),
+            all : 0,
+        }
+        totalPoints.all = totalPoints.habilidade + totalPoints.combate + totalPoints.salvamento + totalPoints.pericia + totalPoints.feito + totalPoints.poder;
+        return totalPoints;
     }
+
+    sumKeys( keys: Key[]): number {
+        let total: number = 0;
+        for(let key of keys) {
+          total += this[key.name];
+        }
+        return total;
+    }
+
+    abilityKeys: Key[] = [
+        { label : "Força", name : "forca" },
+        { label : "Destreza", name : "destreza" }, 
+        { label : "Constituição", name : "constituicao" }, 
+        { label : "Inteligência", name : "inteligencia" }, 
+        { label : "Sabedoria", name : "sabedoria" }, 
+        { label : "Carisma", name : "carisma" }
+    ];
     
-    get combatKeys(): Key[] {
-        return [
-            { label : "Dano", name : "dano" },
-            { label : "Ataque", name : "ataque" },
-            { label : "Defesa", name : "defesa" },
-            { label : "Vida", name : "vida" },
-            { label : "Iniciativa", name : "iniciativa" },
-        ];
-    }
     
-    get savingKeys(): Key[] {
-        return [
-            { label : "Resistência", name : "resistencia"},
-            { label : "Reflexo", name : "reflexo"},
-            { label : "Fortitude", name : "fortitude"},
-            { label : "Vontade", name : "vontade"},
-        ];
-    }
+    combatKeys: Key[] = [
+        { label : "Dano", name : "dano" },
+        { label : "Ataque", name : "ataque" },
+        { label : "Defesa", name : "defesa" },
+        { label : "Vida", name : "vida" },
+        { label : "Iniciativa", name : "iniciativa" },
+    ];
+    
+    
+    savingKeys: Key[] = [
+        { label : "Resistência", name : "resistencia"},
+        { label : "Reflexo", name : "reflexo"},
+        { label : "Fortitude", name : "fortitude"},
+        { label : "Vontade", name : "vontade"},
+    ];
 }
 
 export interface Persona {

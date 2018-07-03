@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { Key, Persona, TotalPoints, HttpSuccessResponse } from './../../interfaces';
+import { Persona, HttpSuccessResponse } from './../../interfaces';
 import { PersonaProvider, HelperProvider, AuthProvider } from '../../providers';
 import { ModalPersonaComponent } from '../../components/persona/modal-persona/modal-persona';
 
@@ -16,10 +16,6 @@ export class PersonaPage {
 
   forms: FormGroup;
   persona: Persona;
-  totalPoints: TotalPoints;
-  abilityKeys: Key[];
-  combatKeys: Key[];
-  savingKeys: Key[];
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
@@ -29,14 +25,10 @@ export class PersonaPage {
               private helperProvider: HelperProvider,
               private personaProvider: PersonaProvider ) {
     this.persona = new Persona(this.navParams.data);
-    this.abilityKeys = this.persona.abilityKeys;
-    this.combatKeys = this.persona.combatKeys;
-    this.savingKeys = this.persona.savingKeys;
     console.log('pagina persona carregada...');
   }
 
   ngOnInit() {
-    this.totalPoints = this.personaProvider.getTotalPoints(this.persona);
     this.forms = this.formBuilder.group({
       id : [this.persona.id],
       nome : [ this.persona.nome,
@@ -66,7 +58,6 @@ export class PersonaPage {
     this.forms.valueChanges.subscribe(
       (persona) => {
           this.persona = new Persona(persona);
-          this.totalPoints = this.personaProvider.getTotalPoints(persona);
       } 
     );
   }
@@ -120,7 +111,7 @@ export class PersonaPage {
   presentModalPersona() {
     let modal = this.modalCtrl.create(
       ModalPersonaComponent, 
-      {persona: this.forms.value, total: this.totalPoints}
+      {persona: this.forms.value}
     );
     modal.present();
   }
