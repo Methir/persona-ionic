@@ -6,6 +6,7 @@ import { Item } from '../../../../interfaces';
 import { ModalAttributeComponent } from '../modal-attribute/modal-attribute';
 import { Pericia } from '../periciasList';
 import { Feito } from './../feitosList';
+import { Desvantagens } from '../desvantagensList';
 
 export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
@@ -35,6 +36,8 @@ export class DinamicListPersonaComponent implements ControlValueAccessor {
       this.itemsList = new Feito().items;
     }else if (this.itemsType === 'pericias') {
       this.itemsList = new Pericia().items;
+    }else if (this.itemsType === 'desvantagens'){
+      this.itemsList = new Desvantagens().items;
     }
   }
 

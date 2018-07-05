@@ -12,7 +12,8 @@ export interface Power {
     checked: boolean,
     graduacao: number,
     extras: PowerOption[],
-    falhas: PowerOption[]
+    falhas: PowerOption[],
+    opcoes: PowerOption[],
 }
 
 export interface PowerOption {

@@ -149,6 +149,59 @@
                         </ion-row>
                     </ion-card-content>
                 </ion-card>
+                <ion-card>
+                    <ion-card-header>
+                        <ion-card-title>Feitos de Poder:</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <ion-row>
+                            <ion-col col-5>
+                                <ion-item>
+                                    <ion-label>Nome</ion-label>
+                                    <ion-select #opcao interface="popover">
+                                        <ion-option *ngFor="let opcaoList of opcoesList" 
+                                                    [value]="opcaoList" 
+                                        >
+                                            {{ opcaoList.nome }}
+                                        </ion-option>                            
+                                    </ion-select>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col col-5>
+                                <ion-item>
+                                    <ion-label>Graduação</ion-label>
+                                    <ion-select [(ngModel)]="opcao.value.modificador" (ngModelChange)="change()"
+                                                [disabled]="!opcao.hasValue()" interface="popover">
+                                        <ion-option *ngFor="let modificador of opcao.value.modificadores" 
+                                                    [value]="modificador" 
+                                        >
+                                            {{ modificador }}
+                                        </ion-option>                            
+                                    </ion-select>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col col-2>
+                                <button ion-fab color="primary" mini 
+                                        [hidden]="opcao.value.checked"
+                                        [disabled]="!opcao.hasValue()"
+                                        (click)="opcao.value.checked = true; change()" 
+                                >
+                                    <ion-icon name="add"></ion-icon>
+                                </button>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-12>
+                                <ion-chip *ngFor="let opcao of opcoes">
+                                    <button ion-button clear color="dark" (click)="opcao.checked = false; change();">
+                                        <ion-icon name="trash"></ion-icon>
+                                    </button>
+                                    <ion-label>{{ opcao.nome }} {{ opcao.modificador }}</ion-label>
+                                </ion-chip>
+                            </ion-col>
+                        </ion-row>
+                    </ion-card-content>
+                </ion-card>
             </ion-grid>
         </ion-card-content>
     </ion-card>

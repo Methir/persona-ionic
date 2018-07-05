@@ -73,6 +73,9 @@
             </span>
             <span *ngFor="let falha of poder.falhas">
               {{ falha.nome }} -{{ falha.modificador }},
+            </span>
+            <span *ngFor="let opcao of poder.opcoes">
+              {{ opcao.nome }} {{ opcao.modificador }},
             </span>)
           </span>
         </ion-card-content>
@@ -101,6 +104,19 @@
               {{ pericia.nome }} 
               <span *ngIf="persona.bonusPoints[pericia.habilidade_chave]">({{ (persona.bonusPoints[pericia.habilidade_chave] + pericia.graduacao)|truncateNumber }})</span>
               {{ pericia.graduacao }}pp                  
+            </ion-label>
+          </ion-chip>
+        </ion-card-content>
+      </ion-card> 
+
+      <ion-card>
+        <ion-card-header>
+          Desvantagens -{{ persona.totalPoints.desvantagem }}pp
+        </ion-card-header>
+        <ion-card-content>
+          <ion-chip *ngFor="let desvantagem of persona.desvantagens">
+            <ion-label>
+              {{ desvantagem.nome }} {{ desvantagem.graduacao }}pp                  
             </ion-label>
           </ion-chip>
         </ion-card-content>

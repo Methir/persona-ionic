@@ -53,6 +53,7 @@ export class PersonaPage {
       vontade : [this.persona.vontade, Validators.required],
       feitos : [this.persona.feitos],
       pericias : [this.persona.pericias],
+      desvantagens : [this.persona.desvantagens],
       poderes : [this.persona.poderes],
     });
     this.forms.valueChanges.subscribe(

@@ -27,6 +27,11 @@
                             {{ falha.nome }} -{{ falha.modificador }}
                         </ion-label>
                     </ion-chip>
+                    <ion-chip *ngFor="let opcao of power.opcoes">
+                        <ion-label>
+                            {{ opcao.nome }} {{ opcao.modificador }}
+                        </ion-label>
+                    </ion-chip>                   
                 </ion-card-content>
             </ion-card>
         </ion-col>

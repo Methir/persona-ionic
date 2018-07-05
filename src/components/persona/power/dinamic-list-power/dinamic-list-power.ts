@@ -69,6 +69,7 @@ export class DinamicListPowerComponent implements ControlValueAccessor {
           powerList.custo = power.custo;
           powerList.extras = power.extras;
           powerList.falhas = power.falhas;
+          powerList.opcoes = power.opcoes;
         }
       });
     }

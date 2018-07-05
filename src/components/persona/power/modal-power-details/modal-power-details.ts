@@ -1,9 +1,11 @@
+import { PowerOption } from './../../../../interfaces';
 import { NavParams, ViewController } from 'ionic-angular';
 import { Component } from '@angular/core';
 
 import { ExtrasList } from '../extrasList';
 import { FalhasList } from './../falhasList';
 import { Power } from '../../../../interfaces';
+import { OpcoesList } from '../opcoesList';
 
 @Component({
   selector: 'modal-power-details',
@@ -12,8 +14,9 @@ import { Power } from '../../../../interfaces';
 export class ModalPowerDetailsComponent {
 
   public power: Power;
-  public extrasList;
-  public falhasList; 
+  public extrasList: PowerOption[];
+  public falhasList: PowerOption[];
+  public opcoesList: PowerOption[];  
   public graduacaoOptions: number[] = [];
   public custoOptions: number[] = [];
 
@@ -41,15 +44,23 @@ export class ModalPowerDetailsComponent {
     }); 
   }
 
+  get opcoes() {
+    return this.opcoesList.filter((opcaoList) => {
+      return opcaoList.checked;
+    }); 
+  }
+
   change() {
     this.power.extras = this.extras;
     this.power.falhas = this.falhas;
+    this.power.opcoes = this.opcoes;
     this.navParams.data['callback']();
   }
 
   initializeItems() {
     this.extrasList = new ExtrasList().items;
     this.falhasList = new FalhasList().items;
+    this.opcoesList = new OpcoesList().items;
     this.power = this.navParams.data['power'];
     
     this.power.extras.forEach((extra) => {
@@ -71,6 +82,17 @@ export class ModalPowerDetailsComponent {
       if (falhaList) {
         falhaList.checked = true;
         falhaList.modificador = falha.modificador;
+      }
+    });
+
+    this.power.opcoes.forEach((opcao) => {
+      let opcaoList = this.opcoesList.find((opcaoList) => {
+        return opcaoList.id == opcao.id;
+      });
+
+      if (opcaoList) {
+        opcaoList.checked = true;
+        opcaoList.modificador = opcao.modificador;
       }
     });
   }

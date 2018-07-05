@@ -25,6 +25,7 @@ export class Persona implements Persona{
 
     feitos: Item[] = [];
     pericias: Item[] = [];
+    desvantagens: Item[] = [];
     poderes: Power[] = [];
 
     constructor(persona: Persona = null) {
@@ -53,6 +54,7 @@ export class Persona implements Persona{
         
             this.feitos = persona.feitos||[];
             this.pericias = persona.pericias||[];
+            this.desvantagens = persona.desvantagens||[];
             this.poderes = persona.poderes||[];
         }
     }
@@ -86,25 +88,33 @@ export class Persona implements Persona{
             salvamento : this.sumKeys( this.savingKeys),
             feito : this.feitos.reduce((total, feito) => total + feito.graduacao, 0),
             pericia : Math.ceil((this.pericias.reduce((total, pericia) => total + pericia.graduacao, 0))/4),
+            desvantagem : this.desvantagens.reduce((total, desvantagem) => total + desvantagem.graduacao, 0),
             poder: this.poderes.reduce((total, poder) => {
                 let custoTotal: number;
                 custoTotal = poder.custo;
+
                 custoTotal += poder.extras.reduce((total, extra) => {
                     return total + extra.modificador;
                 }, 0);
+
                 custoTotal -= poder.falhas.reduce((total, falha) => {
                     return total + falha.modificador;
                 }, 0);
 
                 if (custoTotal <= 0) {
-                    return total += Math.ceil(poder.graduacao/(2 - custoTotal));
+                    custoTotal = Math.ceil(poder.graduacao/(2 - custoTotal));
                 } else {
-                    return total += poder.graduacao * custoTotal;
+                    custoTotal = poder.graduacao * custoTotal;
                 }
+
+                return total + custoTotal + poder.opcoes.reduce((total, opcao) => {
+                    return total + opcao.modificador;
+                }, 0);
             }, 0),
             all : 0,
         }
-        totalPoints.all = totalPoints.habilidade + totalPoints.combate + totalPoints.salvamento + totalPoints.pericia + totalPoints.feito + totalPoints.poder;
+
+        totalPoints.all = totalPoints.habilidade + totalPoints.combate + totalPoints.salvamento + totalPoints.pericia + totalPoints.feito - totalPoints.desvantagem + totalPoints.poder;
         return totalPoints;
     }
 
@@ -168,5 +178,6 @@ export interface Persona {
 
     pericias: Item[],
     feitos: Item[],
+    desvantagens: Item[],
     poderes: Power[],
 }

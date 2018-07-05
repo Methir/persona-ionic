@@ -127,8 +127,18 @@
           </card-persona>
         </ion-col>
         <!-- Close Pericia Part -->
+        <!-- Open Desvantagem Part -->
+        <ion-col col-12 col-ms-12 col-md-12 col-lg-6 col-xl-6>
+          <card-persona label="Desvantagens" [points]="(persona.totalPoints.desvantagem * -1)">
+            <dinamic-list-persona itemsType="desvantagens"
+                                  formControlName="desvantagens"
+            >
+            </dinamic-list-persona>
+          </card-persona>
+        </ion-col>
+        <!-- Close Desvantagem Part -->        
       </ion-row>
-      <!--form-debug [form]="forms"></form-debug-->
+      <form-debug [form]="forms"></form-debug>
       <!--info-debug [obj]="forms.value.poderes"></info-debug-->
     </form>      
   </ion-grid>
