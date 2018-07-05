@@ -202,6 +202,59 @@
                         </ion-row>
                     </ion-card-content>
                 </ion-card>
+                <ion-card>
+                    <ion-card-header>
+                        <ion-card-title>Poderes Alternativos:</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <ion-row>
+                            <ion-col col-5>
+                                <ion-item>
+                                    <ion-label>Nome</ion-label>
+                                    <ion-select #pa interface="popover">
+                                        <ion-option *ngFor="let poderAlternativoList of poderesAlternativosList" 
+                                                    [value]="poderAlternativoList" 
+                                        >
+                                            {{ poderAlternativoList.nome }}
+                                        </ion-option>                            
+                                    </ion-select>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col col-5>
+                                <ion-item>
+                                    <ion-label>Graduação</ion-label>
+                                    <ion-select [(ngModel)]="pa.value.modificador" (ngModelChange)="change()"
+                                                [disabled]="!pa.hasValue()" interface="popover">
+                                        <ion-option *ngFor="let modificador of pa.value.modificadores" 
+                                                    [value]="modificador" 
+                                        >
+                                            {{ modificador }}
+                                        </ion-option>                            
+                                    </ion-select>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col col-2>
+                                <button ion-fab color="light" mini 
+                                        [hidden]="pa.value.checked"
+                                        [disabled]="!pa.hasValue()"
+                                        (click)="pa.value.checked = true; change()" 
+                                >
+                                    <ion-icon name="add"></ion-icon>
+                                </button>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-12>
+                                <ion-chip *ngFor="let poderAlternativo of poderesAlternativos">
+                                    <button ion-button clear color="dark" (click)="poderAlternativo.checked = false; change();">
+                                        <ion-icon name="trash"></ion-icon>
+                                    </button>
+                                    <ion-label>{{ poderAlternativo.nome }} {{ poderAlternativo.modificador }}</ion-label>
+                                </ion-chip>
+                            </ion-col>
+                        </ion-row>
+                    </ion-card-content>
+                </ion-card>
             </ion-grid>
         </ion-card-content>
     </ion-card>

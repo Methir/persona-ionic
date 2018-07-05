@@ -107,9 +107,15 @@ export class Persona implements Persona{
                     custoTotal = poder.graduacao * custoTotal;
                 }
 
-                return total + custoTotal + poder.opcoes.reduce((total, opcao) => {
+                custoTotal += poder.opcoes.reduce((total, opcao) => {
                     return total + opcao.modificador;
                 }, 0);
+
+                custoTotal += poder.poderes_alternativos.reduce((total, poderAlternativo) => {
+                    return total + poderAlternativo.modificador;
+                }, 0);
+
+                return total + custoTotal;
             }, 0),
             all : 0,
         }

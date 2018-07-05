@@ -6,6 +6,7 @@ import { ExtrasList } from '../extrasList';
 import { FalhasList } from './../falhasList';
 import { Power } from '../../../../interfaces';
 import { OpcoesList } from '../opcoesList';
+import { PoderesAlternativosList } from '../poderesAlternativosList';
 
 @Component({
   selector: 'modal-power-details',
@@ -17,6 +18,7 @@ export class ModalPowerDetailsComponent {
   public extrasList: PowerOption[];
   public falhasList: PowerOption[];
   public opcoesList: PowerOption[];  
+  public poderesAlternativosList: PowerOption[];  
   public graduacaoOptions: number[] = [];
   public custoOptions: number[] = [];
 
@@ -27,9 +29,8 @@ export class ModalPowerDetailsComponent {
     for(let i: number = 1; i<=20; i++) {
       this.graduacaoOptions.push(i);
     }
-    for(let i: number = this.power.custo_min; i<=this.power.custo_max; i++) {
-      this.custoOptions.push(i);
-    }
+    this.custoOptions = this.power.custos;
+    
   }
 
   get extras() {
@@ -50,10 +51,17 @@ export class ModalPowerDetailsComponent {
     }); 
   }
 
+  get poderesAlternativos() {
+    return this.poderesAlternativosList.filter((poderAlternativoList) => {
+      return poderAlternativoList.checked;
+    }); 
+  }
+
   change() {
     this.power.extras = this.extras;
     this.power.falhas = this.falhas;
     this.power.opcoes = this.opcoes;
+    this.power.poderes_alternativos = this.poderesAlternativos;
     this.navParams.data['callback']();
   }
 
@@ -61,6 +69,7 @@ export class ModalPowerDetailsComponent {
     this.extrasList = new ExtrasList().items;
     this.falhasList = new FalhasList().items;
     this.opcoesList = new OpcoesList().items;
+    this.poderesAlternativosList = new PoderesAlternativosList().items;
     this.power = this.navParams.data['power'];
     
     this.power.extras.forEach((extra) => {
@@ -93,6 +102,17 @@ export class ModalPowerDetailsComponent {
       if (opcaoList) {
         opcaoList.checked = true;
         opcaoList.modificador = opcao.modificador;
+      }
+    });
+
+    this.power.poderes_alternativos.forEach((poderAlternativo) => {
+      let poderAlternativoList = this.poderesAlternativosList.find((poderAlternativoList) => {
+        return poderAlternativoList.id == poderAlternativo.id;
+      });
+
+      if (poderAlternativoList) {
+        poderAlternativoList.checked = true;
+        poderAlternativoList.modificador = poderAlternativo.modificador;
       }
     });
   }

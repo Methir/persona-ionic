@@ -68,14 +68,17 @@
             <ion-chip>
               <ion-label>{{ poder.nome }} {{ poder.graduacao }}</ion-label>
             </ion-chip>
-            (<span *ngFor="let extra of poder.extras">
+            (<b>Extras:</b> <span *ngFor="let extra of poder.extras">
               {{ extra.nome }} +{{ extra.modificador }},
             </span>
-            <span *ngFor="let falha of poder.falhas">
+            <b>Falhas:</b> <span *ngFor="let falha of poder.falhas">
               {{ falha.nome }} -{{ falha.modificador }},
             </span>
-            <span *ngFor="let opcao of poder.opcoes">
+            <b>Feitos de poder:</b> <span *ngFor="let opcao of poder.opcoes">
               {{ opcao.nome }} {{ opcao.modificador }},
+            </span>
+            <b>Poderes Alternativos:</b> <span *ngFor="let poderAlternativo of poder.poderes_alternativos">
+              {{ poderAlternativo.nome }} {{ poderAlternativo.modificador }},
             </span>)
           </span>
         </ion-card-content>

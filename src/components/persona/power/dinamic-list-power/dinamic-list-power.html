@@ -31,7 +31,12 @@
                         <ion-label>
                             {{ opcao.nome }} {{ opcao.modificador }}
                         </ion-label>
-                    </ion-chip>                   
+                    </ion-chip>
+                    <ion-chip *ngFor="let poderAlternativo of power.poderes_alternativos">
+                        <ion-label>
+                            {{ poderAlternativo.nome }} {{ poderAlternativo.modificador }}
+                        </ion-label>
+                    </ion-chip>                        
                 </ion-card-content>
             </ion-card>
         </ion-col>

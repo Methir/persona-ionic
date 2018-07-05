@@ -70,6 +70,7 @@ export class DinamicListPowerComponent implements ControlValueAccessor {
           powerList.extras = power.extras;
           powerList.falhas = power.falhas;
           powerList.opcoes = power.opcoes;
+          powerList.poderes_alternativos = power.poderes_alternativos;
         }
       });
     }
