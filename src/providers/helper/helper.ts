@@ -1,5 +1,3 @@
-import { Key } from './../../interfaces/key';
-import { Persona } from './../../interfaces/persona';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -43,13 +41,4 @@ export class HelperProvider {
     });
     toast.present();
   }
-
-  sumKeys(persona: Persona, keys: Key[]) {
-    let total: number = 0;
-    for(let key of keys) {
-      total += persona[key.name];
-    }
-    return total;
-  }
-
 }
