@@ -109,6 +109,14 @@ export class PersonaPage {
     }
   }
 
+  createPersonaPDF() {
+    if (this.forms.value['id']) {
+      window.open(`${this.helperProvider.baseUrl}/personas/pdf/${this.forms.value.id}`);
+    }else{
+      this.helperProvider.persistAlert('Você precisa salvar a ficha, antes que possa gerar o PDF.');
+    }
+  }
+
   presentModalPersona() {
     let modal = this.modalCtrl.create(
       ModalPersonaComponent, 

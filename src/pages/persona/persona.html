@@ -9,6 +9,13 @@
     <button ion-fab color="primary">
       <ion-icon name="person"></ion-icon>
     </button>
+    <ion-fab-list side="left">
+      <button ion-fab color="danger" 
+              (click)="createPersonaPDF()"
+      > 
+        PDF
+      </button>
+    </ion-fab-list>
     <ion-fab-list side="bottom">
       <button ion-fab color="secondary" 
               (click)="savePersona()"
